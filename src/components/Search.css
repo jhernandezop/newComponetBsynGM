@@ -1,0 +1,59 @@
+
+
+#search {
+    padding: 5px;
+
+
+}
+
+#search .form-control{
+    border: 0px;
+    border-radius: 0px;
+    background: none;
+    font-weight: 100;
+     border-bottom: 0.5px solid #77777745;
+
+}
+#search .form-control:focus{
+    box-shadow: none;
+
+
+}
+
+#search .input-group-text{
+    border: 0px;
+    border-radius: 0px;
+    font-size: 10px;
+    background: none;
+    border-bottom: 0.5px solid #77777745;
+
+}
+
+#search .off{
+    opacity: 0.5;
+}
+
+#search .badge:hover{
+    cursor: pointer;;
+
+}
+
+#search .padre{
+    cursor: pointer;
+        display: -webkit-box;
+
+}
+
+#search .hijo .badge-dark {
+    background-color: #828282;
+}
+
+#search .marcas .badge {
+    font-size: 10px;
+    font-weight: 100 !important;
+    text-transform: capitalize;
+    margin: 1px;
+        line-height: normal;
+        padding: .05em .3em;
+
+}

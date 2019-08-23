@@ -1,0 +1,87 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Field Set",
+            "legend": "Resultado agendamiento",
+            "mask": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "fieldset",
+            "input": false,
+            "key": "fieldSet2",
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "components": [
+                {
+                    "label": "Seleccione",
+                    "mask": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "select",
+                    "input": true,
+                    "key": "seleccione",
+                    "defaultValue": "",
+                    "validate": {
+                        "select": false,
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Cerrado con Venta",
+                                "value": "cerradoconVenta"
+                            },
+                            {
+                                "label": "Cerrado sin Venta",
+                                "value": "cerradoSinVenta"
+                            }
+                        ]
+                    },
+                    "valueProperty": "value",
+                    "selectThreshold": 0.3,
+                    "encrypted": false,
+                    "reorder": false,
+                    "lazyLoad": false,
+                    "selectValues": "",
+                    "disableLimit": false,
+                    "sort": "",
+                    "reference": false,
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "attributes": {}
+                }
+            ],
+            "reorder": false,
+            "properties": {},
+            "customConditional": "",
+            "logic": [],
+            "attributes": {}
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "key": "submit",
+            "disableOnInvalid": true,
+            "theme": "primary",
+            "input": true,
+            "tableView": true
+        }
+    ],
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    }
+}

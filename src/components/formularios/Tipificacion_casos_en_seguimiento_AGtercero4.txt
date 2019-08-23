@@ -1,0 +1,422 @@
+{
+    "display": "form",
+    "components": [
+        {
+            "label": "Field Set",
+            "legend": "Resultado llamada",
+            "mask": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "fieldset",
+            "input": false,
+            "key": "fieldSet2",
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "components": [
+                {
+                    "label": "Seleccionar",
+                    "mask": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "select",
+                    "input": true,
+                    "key": "select",
+                    "defaultValue": "",
+                    "validate": {
+                        "customMessage": "",
+                        "json": "",
+                        "select": false
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "data": {
+                        "values": [
+                            {
+                                "label": "En seguimiento",
+                                "value": "en_seguimiento"
+                            },
+                            {
+                                "label": "Sin interés",
+                                "value": "sin_interes"
+                            },
+                            {
+                                "label": "Agendamiento propio",
+                                "value": "agendamiento_propio"
+                            },
+                            {
+                                "label": "Agendamiento a tercero",
+                                "value": "agendamiento_tercero"
+                            },
+                            {
+                                "label": "Datos erróneos",
+                                "value": "datos_erroneos"
+                            },
+                            {
+                                "label": "Sin respuesta",
+                                "value": "sin_respuesta"
+                            }
+                        ]
+                    },
+                    "valueProperty": "value",
+                    "selectThreshold": 0.3,
+                    "encrypted": false,
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "attributes": {},
+                    "reorder": false,
+                    "lazyLoad": false,
+                    "selectValues": "",
+                    "disableLimit": false,
+                    "sort": "",
+                    "reference": false
+                },
+                {
+                    "label": "Comentarios",
+                    "showWordCount": false,
+                    "showCharCount": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "textarea",
+                    "input": true,
+                    "key": "comentarios",
+                    "defaultValue": "escribir...",
+                    "validate": {
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "inputFormat": "html",
+                    "encrypted": false,
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "attributes": {},
+                    "autoExpand": true,
+                    "isUploadEnabled": false,
+                    "uploadUrl": "",
+                    "uploadOptions": "",
+                    "uploadDir": "",
+                    "reorder": false
+                },
+                {
+                    "label": "Detalle del Agendamiento",
+                    "columns": [
+                        {
+                            "components": [
+                                {
+                                    "label": "Ejecutivo de Piso",
+                                    "mask": false,
+                                    "tableView": true,
+                                    "alwaysEnabled": false,
+                                    "type": "select",
+                                    "input": true,
+                                    "key": "ejecutivoDePiso",
+                                    "validate": {
+                                        "select": false,
+                                        "customMessage": "",
+                                        "json": ""
+                                    },
+                                    "conditional": {
+                                        "show": "",
+                                        "when": "",
+                                        "json": ""
+                                    },
+                                    "data": {
+                                        "values": [
+                                            {
+                                                "label": "",
+                                                "value": ""
+                                            }
+                                        ]
+                                    },
+                                    "valueProperty": "value",
+                                    "lazyLoad": false,
+                                    "selectValues": "",
+                                    "disableLimit": false,
+                                    "sort": "",
+                                    "reference": false,
+                                    "selectThreshold": 0.3,
+                                    "encrypted": false,
+                                    "properties": {},
+                                    "customConditional": "",
+                                    "logic": [],
+                                    "attributes": {},
+                                    "defaultValue": "",
+                                    "reorder": false
+                                },
+                                {
+                                    "label": "Fecha de Agendamiento",
+                                    "mask": false,
+                                    "tableView": true,
+                                    "alwaysEnabled": false,
+                                    "type": "datetime",
+                                    "input": true,
+                                    "key": "fechaDeAgendamiento",
+                                    "suffix": true,
+                                    "defaultValue": "",
+                                    "widget": {
+                                        "type": "calendar",
+                                        "displayInTimezone": "viewer",
+                                        "submissionTimezone": "America/Santiago",
+                                        "language": "en",
+                                        "useLocaleSettings": false,
+                                        "allowInput": true,
+                                        "mode": "single",
+                                        "enableTime": true,
+                                        "noCalendar": false,
+                                        "format": "yyyy-MM-dd hh:mm a",
+                                        "defaultDate": "",
+                                        "hourIncrement": 1,
+                                        "minuteIncrement": 1,
+                                        "time_24hr": false,
+                                        "minDate": "",
+                                        "maxDate": "",
+                                        "icons": "fontawesome",
+                                        "i18n": {
+                                            "lng": "en",
+                                            "resources": {
+                                                "en": {
+                                                    "translation": {
+                                                        "complete": "Submission Complete",
+                                                        "error": "Please fix the following errors before submitting.",
+                                                        "required": "{{field}} is required",
+                                                        "pattern": "{{field}} does not match the pattern {{pattern}}",
+                                                        "minLength": "{{field}} must be longer than {{length}} characters.",
+                                                        "maxLength": "{{field}} must be shorter than {{length}} characters.",
+                                                        "minWords": "{{field}} must have more than {{length}} words.",
+                                                        "maxWords": "{{field}} must have less than {{length}} words.",
+                                                        "min": "{{field}} cannot be less than {{min}}.",
+                                                        "max": "{{field}} cannot be greater than {{max}}.",
+                                                        "minSelectedCount": "You must select at least {{minCount}} items to continue.",
+                                                        "maxSelectedCount": "You can only select up to {{maxCount}} items to continue.",
+                                                        "maxDate": "{{field}} should not contain date after {{- maxDate}}",
+                                                        "minDate": "{{field}} should not contain date before {{- minDate}}",
+                                                        "invalid_email": "{{field}} must be a valid email.",
+                                                        "invalid_url": "{{field}} must be a valid url.",
+                                                        "invalid_regex": "{{field}} does not match the pattern {{regex}}.",
+                                                        "invalid_date": "{{field}} is not a valid date.",
+                                                        "invalid_day": "{{field}} is not a valid day.",
+                                                        "mask": "{{field}} does not match the mask.",
+                                                        "stripe": "{{stripe}}",
+                                                        "month": "Month",
+                                                        "day": "Day",
+                                                        "year": "Year",
+                                                        "january": "January",
+                                                        "february": "February",
+                                                        "march": "March",
+                                                        "april": "April",
+                                                        "may": "May",
+                                                        "june": "June",
+                                                        "july": "July",
+                                                        "august": "August",
+                                                        "september": "September",
+                                                        "october": "October",
+                                                        "november": "November",
+                                                        "december": "December",
+                                                        "next": "Next",
+                                                        "previous": "Previous",
+                                                        "cancel": "Cancel",
+                                                        "submit": "Submit Form"
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    },
+                                    "validate": {
+                                        "customMessage": "",
+                                        "json": ""
+                                    },
+                                    "conditional": {
+                                        "show": "",
+                                        "when": "",
+                                        "json": ""
+                                    },
+                                    "datePicker": {
+                                        "minDate": "",
+                                        "maxDate": ""
+                                    },
+                                    "reorder": false,
+                                    "encrypted": false,
+                                    "properties": {},
+                                    "customConditional": "",
+                                    "logic": [],
+                                    "attributes": {}
+                                }
+                            ],
+                            "width": 6,
+                            "offset": 0,
+                            "push": 0,
+                            "pull": 0,
+                            "type": "column",
+                            "input": false,
+                            "hideOnChildrenHidden": false,
+                            "key": "column",
+                            "tableView": true,
+                            "label": "Column"
+                        },
+                        {
+                            "components": [
+                                {
+                                    "label": "Comentario a ejecutivo",
+                                    "autoExpand": false,
+                                    "isUploadEnabled": false,
+                                    "showWordCount": false,
+                                    "showCharCount": false,
+                                    "tableView": true,
+                                    "alwaysEnabled": false,
+                                    "type": "textarea",
+                                    "input": true,
+                                    "key": "comentarioAEjecutivo",
+                                    "defaultValue": "",
+                                    "refreshOn": "submit",
+                                    "validate": {
+                                        "customMessage": "",
+                                        "json": ""
+                                    },
+                                    "conditional": {
+                                        "show": "",
+                                        "when": "",
+                                        "json": ""
+                                    },
+                                    "inputFormat": "html",
+                                    "encrypted": false,
+                                    "uploadUrl": "",
+                                    "uploadOptions": "",
+                                    "uploadDir": "",
+                                    "reorder": false,
+                                    "properties": {},
+                                    "customConditional": "",
+                                    "logic": [],
+                                    "attributes": {}
+                                },
+                                {
+                                    "label": "Enviar correo a Cliente",
+                                    "labelPosition": "left-left",
+                                    "optionsLabelPosition": "right",
+                                    "values": [
+                                        {
+                                            "label": "",
+                                            "value": "",
+                                            "shortcut": ""
+                                        }
+                                    ],
+                                    "mask": false,
+                                    "tableView": true,
+                                    "alwaysEnabled": false,
+                                    "type": "selectboxes",
+                                    "input": true,
+                                    "key": "enviarCorreoACliente",
+                                    "defaultValue": {
+                                        "": false
+                                    },
+                                    "validate": {
+                                        "customMessage": "",
+                                        "json": ""
+                                    },
+                                    "conditional": {
+                                        "show": "true",
+                                        "when": "select",
+                                        "eq": "conAgendamiento",
+                                        "json": ""
+                                    },
+                                    "inputType": "checkbox",
+                                    "customConditional": "",
+                                    "encrypted": false,
+                                    "minSelectedCountMessage": "",
+                                    "maxSelectedCountMessage": "",
+                                    "properties": {},
+                                    "logic": [],
+                                    "attributes": {},
+                                    "labelWidth": 29,
+                                    "labelMargin": 1,
+                                    "reorder": false
+                                }
+                            ],
+                            "width": 6,
+                            "offset": 0,
+                            "push": 0,
+                            "pull": 0,
+                            "type": "column",
+                            "input": false,
+                            "hideOnChildrenHidden": false,
+                            "key": "column",
+                            "tableView": true,
+                            "label": "Column"
+                        }
+                    ],
+                    "mask": false,
+                    "tableView": false,
+                    "alwaysEnabled": false,
+                    "type": "columns",
+                    "input": false,
+                    "key": "detalleDelAgendamiento",
+                    "conditional": {
+                        "show": "true",
+                        "when": "select",
+                        "eq": "agendamiento_tercero",
+                        "json": ""
+                    },
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "attributes": {},
+                    "reorder": false
+                }
+            ],
+            "reorder": false,
+            "properties": {},
+            "customConditional": "",
+            "logic": [],
+            "attributes": {}
+        },
+        {
+            "label": "Enviar",
+            "state": "",
+            "shortcut": "",
+            "disableOnInvalid": true,
+            "mask": false,
+            "tableView": true,
+            "alwaysEnabled": false,
+            "type": "button",
+            "key": "submit",
+            "input": true,
+            "defaultValue": false,
+            "validate": {
+                "customMessage": "",
+                "json": ""
+            },
+            "conditional": {
+                "show": "",
+                "when": "",
+                "json": ""
+            },
+            "encrypted": false,
+            "properties": {},
+            "showValidations": false,
+            "event": "",
+            "url": "",
+            "custom": "",
+            "reorder": false,
+            "customConditional": "",
+            "logic": [],
+            "attributes": {}
+        }
+    ],
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    }
+}

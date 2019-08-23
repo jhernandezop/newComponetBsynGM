@@ -1,0 +1,139 @@
+.contenedorFormularios{
+	/*border:1px solid #000;*/
+    position: absolute;
+    top: 0;
+    bottom: 0px;
+    /**/overflow: hidden;
+    overflow-y: auto;
+    width: inherit;
+    background-color:#d6d6d6;
+    font-weight: 100;
+        padding-bottom: 150px;
+        padding-left: 20px;
+        padding-right: 20px;
+}
+.formio-modified, .contenedorFormularios > div{
+	width: 100%;
+	padding-top: 0px;
+}
+
+.contenedorFormularios .card{
+	border:none;
+}
+.contenedorFormularios .formio-component > .card > .card-header{
+	background-color: #d6d6d6;
+	border-bottom:none;
+	    padding-top: 0px;
+	    padding-left: 5px;
+}
+.contenedorFormularios .formio-component > .card > .card-header .card-header-tabs {
+    margin-right: -.625rem;
+    margin-bottom: -.70rem;
+    margin-left: -.625rem;
+    border-bottom: 0;
+}
+
+.contenedorFormularios .contenedorFormularios .card-header{
+	background-color:#d6d6d6;
+	border-bottom:none;
+}
+
+.contenedorFormularios .nav-tabs .nav-item.show .nav-link, .contenedorFormularios .nav-tabs .nav-link.active {
+background-color: #FFF;
+    border-color:#fff;
+    color: #000;
+}
+
+.contenedorFormularios .nav-tabs .nav-link{
+	background-color: #00a09d2b;
+	border-bottom:0px;
+	color: #FFF;
+}
+
+.contenedorFormularios .nav-tabs .nav-link:hover{
+	border-color: #FFF;
+}
+
+.contenedorFormularios .nav-tabs li {
+	padding-left: 5px;
+}
+
+.formio-component > .tab-content{
+    background-color: #FFF;
+    margin-bottom: 20px;
+    padding: 20px;
+    margin-left: 5px;
+	box-shadow: -5px 16px 14px 0px rgba(0, 0, 0, 0.2);
+
+}
+
+
+/*OTRO TIPO D EFORMULARIO*/
+.formio-form legend{
+    background-color: #FFF;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+}
+
+.formio-form fieldset{
+    background-color: #FFF;
+    margin-bottom: 20px;
+    box-shadow: -5px 16px 14px 0px rgba(0, 0, 0, 0.2);
+}
+
+.formio-form .btn-default{
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.contenedorFormularios .form-control {
+    font-size: 12px;
+    font-weight: 300;
+    padding: .175rem .45rem;
+    border: 0.4px solid #CCC;
+
+}
+
+.contenedorFormularios .control-label{
+    font-size: 12px;
+    margin-bottom: 0px;
+
+}
+
+.contenedorFormularios .form-group{
+    margin-bottom: 5px;
+
+}
+
+.contenedorFormularios .panel-title{
+    font-size: 20px;
+    font-weight: 100;
+
+}
+
+::-webkit-scrollbar {
+            margin-right: 4px;
+            background-color: #CCCCCC;
+            width: 9px;
+            border: 4px #000 solid;
+        }
+        
+        
+        
+        
+        ::-webkit-scrollbar-thumb {
+            background: #666666;
+            margin-right: 50px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background:#000;
+        }
+        
+        ::-webkit-scrollbar-track {
+            border: 5px #CCC solid;
+        }
+        

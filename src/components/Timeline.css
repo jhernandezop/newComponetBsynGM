@@ -1,0 +1,237 @@
+#lineadetiempo{
+    overflow: hidden;
+    overflow-y: auto;
+    
+
+}
+
+.titulo, .subtitulo{
+	font-size: 12px;
+}
+
+#lineadetiempo .entry .body {
+    margin: 0 0 4em; 
+    float: right;
+    width: 66%;
+    color: #333;
+  }
+
+.titulo{
+	font-size: 10px;
+    margin-bottom: 5px;
+    position: absolute;
+    font-weight: 300;
+}
+
+.subtitulo {
+    margin-top: 9px;
+    position: absolute;
+}
+
+
+.gestion1{
+    background: red;
+}
+.timeline-item-dateinner{    
+    font-size: 12px!important;
+    background:#6c757d!important;
+    text-indent: 4px!important;
+    font-weight: 400!important;
+}
+.timeline--wrapper{
+    background: none;
+}
+.timeline--wrapper {
+    width: 100%;
+    padding: 12px;
+    padding-top: 0px;
+}
+
+.timeline-item-dateinner{
+	background: none !important;
+    font-size: 9px !important;
+    color: #000;
+}
+
+.timeline-item-date {
+   
+    top: -14px;
+    left: 0;
+    background: none;
+    padding: 1px;
+    
+
+
+}
+
+
+
+.timeline {
+    width: 100%;
+    max-width: 800px;
+    padding: 0px 0 0 0;
+    box-shadow:none;
+    margin: 0px auto;
+}
+
+.timeline:before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: calc(30.5% + 6px);
+    bottom: 44px;
+    width: 0px;
+    border: 1px solid;
+}
+
+.body-container {
+    position: relative;
+    margin-left: 20px;
+}
+
+/*LINEA MANUAL*/
+
+.lineamanual{
+    width: 100%;
+    padding: 10px;
+    font-size: 10px;
+}
+
+.registro{
+    margin-bottom: 0px;}
+.registro > div{display: inline-flex;}
+.fecha{width: 62px;}
+
+.fecha div{display: block;}
+
+.marcano{
+    background: #1d906c;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.marca{
+    background: #1d906c;
+    width: 10px;
+    height: 10px;
+    border-radius: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.marca .linea{
+        height: 55px;
+    width: 1px;
+    background: #1d906c;
+    position: absolute;
+    margin-top: 4px;
+    margin-left: 4px;
+}
+
+.actividad{text-transform: capitalize; }
+
+
+.actividad > div{
+    display: inline-flex;;
+
+}
+.comentario{
+   
+    position: absolute;
+    background: #CCC;
+    margin-top: 20px;
+    height: 26px;
+    padding: 4px;
+    overflow: hidden;
+    margin-right: 9px;
+    border-radius: 3px;
+
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+    box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+ display: none;
+}
+
+.comentario:hover{
+    
+    cursor: pointer;
+    height: auto;
+    z-index: 9000;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin-left: 8px;
+    font-size: 14px;
+    display: none;
+
+}
+.newcoment{
+
+    background: #CCC;
+    min-width: 35px;
+    height: 26px;
+    padding: 4px;
+    overflow: hidden;
+    margin-right: 9px;
+    border-radius: 3px;
+    position: relative;
+    margin-left: 91px;
+    -webkit-box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+    -moz-box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+    box-shadow: inset 0px 0px 5px 0px rgba(115,115,115,1);
+
+}
+
+.newcoment::after {
+  content: "...";
+}
+.no{
+    content: none !important;
+    background: #fff0 !IMPORTANT;
+    box-shadow: none;
+}
+
+.no::after {
+  content: "";
+}
+
+.marca:before {
+   /* content: "\A";
+    width: 0;
+    height: 0;
+    border-right: 10px solid transparent;
+    border-top: 16px solid transparent;
+    border-left: 10px solid transparent;
+    border-bottom: 8px solid #cac9c9;
+    position: absolute;
+    margin-left: 27px;
+    margin-top: 4px;
+    z-index: 5;*/
+}
+
+.registro:hover .newcoment{
+    opacity: 1;
+    cursor: pointer;
+    z-index: 9000;
+    -webkit-animation-name: example; /* Safari 4.0 - 8.0 */
+    -webkit-animation-duration: 1s; /* Safari 4.0 - 8.0 */
+    -webkit-animation-fill-mode: forwards; /* Safari 4.0 - 8.0 */
+    animation-name: example;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+}
+
+.newcoment:hover::after{
+    content: "";
+}
+
+
+
+/* Standard syntax */
+@keyframes example {
+  from {height: 26px;  margin-left: 27px; min-width: 80%;}
+  to {height:auto;  margin-left: 0px; min-width: 100%;}
+}

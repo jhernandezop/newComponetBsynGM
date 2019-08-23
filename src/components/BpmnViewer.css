@@ -1,0 +1,15 @@
+.diagram-note {
+	background-color:#00C642;
+	padding: 5px;
+	border-radius: 5px;
+	color: #FFF;
+
+}
+
+.BpmnViewer img{
+	display: none;;
+}
+
+g[Attributes Style] {
+    transform: matrix(9, 0, 0, 3, -3, -4);
+}
