@@ -11,13 +11,21 @@ class ConstruirFichas extends Component {
     super(props);
     this.state = {  
        fichas:[],
+       peticion_detalle:false
        
 
      }
      
+     this.peticionDetalle=this.peticionDetalle.bind(this)
   }
 
   //
+
+  peticionDetalle(){
+    this.setState(state => ({
+      peticion_detalle: !state.peticion_detalle
+    }));
+  }
   
   componentDidMount(nextProps) {
     console.log(nextProps)
@@ -49,6 +57,8 @@ class ConstruirFichas extends Component {
                   searchFiltro={this.props.searchFiltro}
                   anexo={this.props.anexo}
                   actualizarUniqueid={this.props.actualizarUniqueid}
+                  peticion_detalle={this.state.peticion_detalle}
+                  peticionDetalle={this.peticionDetalle}
                 />
           )
         }else if(number.canal=="web"){
@@ -61,6 +71,8 @@ class ConstruirFichas extends Component {
                   searchFiltro={this.props.searchFiltro}
                   anexo={this.props.anexo}
                   actualizarUniqueid={this.props.actualizarUniqueid}
+                  peticion_detalle={this.state.peticion_detalle}
+                  peticionDetalle={this.peticionDetalle}
                 />
 
           )
@@ -114,6 +126,13 @@ class UnaFichaTelefonia extends Component {
   }
 
   llamarFormulario= (event) => {
+
+      console.log(this.props.peticion_detalle)
+      if(this.props.peticion_detalle==true){
+        console.log("detenida")
+        return false;
+      }
+      console.log("paso")
       
       this.props.desplegarEdicion("limpiar","","");
       this.props.actualizarUniqueid("0");
@@ -121,6 +140,7 @@ class UnaFichaTelefonia extends Component {
       if(this.state.estado_proceso=="contacto"){
          this.props.desplegarEdicion("",["1"], this.state.caso_ES);
       }else{
+          this.props.peticionDetalle()
           this.props.desplegarEdicion("buscar","",this.state);
           var url = 'https://bscore.openpartner.cl/gdm';
           var data = {
@@ -146,6 +166,7 @@ class UnaFichaTelefonia extends Component {
             })
             .then(res => res.json())
             .then(response => {
+                            this.props.peticionDetalle()
                             console.log(response);
                               if(response.data){
                              console.log(response);
@@ -317,13 +338,20 @@ class UnaFichaCotizacionWeb extends Component {
   }
 
   llamarFormulario= (event) => {
-      
+      console.log(this.props.peticion_detalle)
+      if(this.props.peticion_detalle==true){
+        console.log("detenida")
+        return false;
+      }
+      console.log("paso")
+
       this.props.desplegarEdicion("limpiar","","");
       this.props.actualizarUniqueid("0");
 
       if(this.state.estado_proceso=="contacto"){
          this.props.desplegarEdicion("",["1"], this.state.caso_ES);
       }else{
+          this.props.peticionDetalle()
           this.props.desplegarEdicion("buscar","",this.state);
           var url = 'https://bscore.openpartner.cl/gdm';
           var data = {
@@ -349,6 +377,7 @@ class UnaFichaCotizacionWeb extends Component {
             })
             .then(res => res.json())
             .then(response => {if(response.data){
+                            this.props.peticionDetalle()
                             //console.log(response);
                               this.props.desplegarEdicion("cargar", response.data, this.state);
                               

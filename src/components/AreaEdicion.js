@@ -146,7 +146,7 @@ class AreaEdicion extends Component {
 
 
   componentWillReceiveProps(nextProps){
-    console.log(nextProps)
+    console.log(nextProps.formulario)
      this.ocultarfomrulario()
      
      
@@ -339,22 +339,28 @@ mostrarfomrulario() {
 
 actualizarGestionData(event){
 
-  const campos_nuevos= event.data
+    if(this.props.formulario[0]){
 
-  for (const i in campos_nuevos) {
-        //console.log(i)
-        //console.log(campos_nuevos[i])
-        this.props.formulario[0].datosFormulario[i]=campos_nuevos[i];
-        
 
-  }
+      console.log(this.props.formulario[0])
+      const campos_nuevos= event.data
 
-  if(event.changed.flags.modified){
-    this.setState({data_editada:true});
-  }
-  
-  console.log(event)
-  console.log(this.props.formulario[0].datosFormulario)
+      for (const i in campos_nuevos) {
+            //console.log(i)
+            //console.log(campos_nuevos[i])
+            this.props.formulario[0].datosFormulario[i]=campos_nuevos[i];
+            
+
+      }
+
+      if(event.changed.flags.modified){
+        this.setState({data_editada:true});
+      }
+      
+      console.log(event)
+      console.log(this.props.formulario[0].datosFormulario)
+    } 
+ 
 }
  
 /*<div key={key} className="form-group">
