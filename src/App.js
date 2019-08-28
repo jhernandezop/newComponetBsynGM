@@ -779,8 +779,34 @@ fetch(url, {
     console.log(accion)
     if(accion=="limpiar" || accion==""){
       this.setState({edicion:[]});
+
+      const fichas_actuales=this.state.fichas 
+      fichas_actuales.forEach(function(element_a, index_a) {
+          element_a.selcionada=false
+      })
+      this.setState({fichas:fichas_actuales})
     }else if(accion=="cargar"){
       this.setState({edicion:[{"ficha": ficha, "datosFormulario":datosFormulario}]});
+    
+
+      console.log(ficha)
+      const ficha_selecionada = ficha.caso_ES
+      const fichas_actuales=this.state.fichas 
+      fichas_actuales.forEach(function(element_a, index_a) {
+
+        if(element_a.caso==ficha_selecionada){
+          element_a.selcionada=true
+
+        }else{
+          element_a.selcionada=false
+        }
+        console.log(element_a.selcionada); console.log(ficha_selecionada)
+
+      })
+      this.setState({fichas:fichas_actuales})
+   
+   }else if(accion=="buscar"){
+       this.setState({edicion:[]});
     
 
       console.log(ficha)

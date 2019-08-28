@@ -98,7 +98,7 @@ class Timelines extends Component {
                 console.log(hits)
                 console.log(new_hist)
                 console.log(new_new_hist)
-                this.setState({timelinedata:new_new_hist});
+                this.setState({timelinedata:new_new_hist.reverse()});
 
               })
 

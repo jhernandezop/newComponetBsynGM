@@ -121,7 +121,7 @@ class UnaFichaTelefonia extends Component {
       if(this.state.estado_proceso=="contacto"){
          this.props.desplegarEdicion("",["1"], this.state.caso_ES);
       }else{
-
+          this.props.desplegarEdicion("buscar","",this.state);
           var url = 'https://bscore.openpartner.cl/gdm';
           var data = {
                       "tx": "doc0",
@@ -324,7 +324,7 @@ class UnaFichaCotizacionWeb extends Component {
       if(this.state.estado_proceso=="contacto"){
          this.props.desplegarEdicion("",["1"], this.state.caso_ES);
       }else{
-
+          this.props.desplegarEdicion("buscar","",this.state);
           var url = 'https://bscore.openpartner.cl/gdm';
           var data = {
                       "tx": "doc0",
