@@ -127,8 +127,10 @@ class AreaEdicion extends Component {
         this.state.formulario="detalletelefonia";
         const newForm=detalletelefonia 
         //PESTAÑA INFO CLIENTE = detalleLLamada.components[0].components[0]
+		newForm.components[0].components[0].components[0].defaultValue=f.doc_nu_documento
         newForm.components[0].components[0].components[1].defaultValue=f.doc_nombre
-
+        newForm.components[0].components[0].components[2].defaultValue=f.doc_Ap_paterno
+        newForm.components[0].components[0].components[3].defaultValue=f.doc_patente
       }
 
 

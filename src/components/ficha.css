@@ -169,5 +169,5 @@
 .selecionada .btn-light {
     color: #212529;
     background-color: #ffffff7d;
-    /* border-color: #ffffff; */
+    border:0px !important; 
 }
