@@ -90,26 +90,14 @@ class Timelines extends Component {
                   
                 });
 
-                /* const ordered = {};
-                Object.keys(new_hist).sort().forEach(function(key) {
-                  ordered[key] = new_hist[key];
-                });
-
-                 (Object.keys(new_hist).reduce((accumulator, currentValue) => {
-                  accumulator[currentValue] = new_hist[currentValue];
-                  return accumulator;
-                }, {}));*/ 
                 const new_new_hist=[];
                 for (const i in new_hist) {
                   new_new_hist.push(new_hist[i])
 
                 }
-
-
-                
                 console.log(hits)
                 console.log(new_hist)
-                console.log(new_new_hist.reverse())
+                console.log(new_new_hist)
                 this.setState({timelinedata:new_new_hist});
 
               })
