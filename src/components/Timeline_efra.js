@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Timeline.css';  
-import moment from 'moment';
+
 
 
 class Timelines extends Component {
@@ -10,7 +10,6 @@ class Timelines extends Component {
     super(props);
     this.state = {
       timelinedata: [],
-      tipoFicha:"",
       uniqueid:""
     }
       //this.handleSubmit = this.handleSubmit.bind(this)
@@ -27,11 +26,10 @@ class Timelines extends Component {
 
     if(nextProps.edicion.length>=1){
 
-        console.log(nextProps.edicion[0].ficha)
+        console.log(nextProps.edicion[0].ficha.caso_ES)
         const uid=nextProps.edicion[0].ficha.caso_ES
         this.state.uniqueid=uid
-        this.state.tipoFicha=nextProps.edicion[0].ficha.canal
-        console.log(this.state.tipoFicha)
+        console.log(this.state.uniqueid)
         this.handleSubmit()
     }else{
       this.setState({timelinedata:[]});
@@ -79,38 +77,11 @@ class Timelines extends Component {
               .then(res => res.json())
               .then(response => {
                 console.log(response.data.hits.hits)
-                //const hits=response.data.hits.hits.reverse()
-                 const hits=response.data.hits.hits;
-
-                 const new_hist={};
-                
-
-                 hits.forEach(function(key) {
-                  new_hist[moment(key._source.caso_ts_ult_ges).format("X")] = key;
-                  
-                });
-
-                /* const ordered = {};
-                Object.keys(new_hist).sort().forEach(function(key) {
-                  ordered[key] = new_hist[key];
-                });
-
-                 (Object.keys(new_hist).reduce((accumulator, currentValue) => {
-                  accumulator[currentValue] = new_hist[currentValue];
-                  return accumulator;
-                }, {}));*/ 
-                const new_new_hist=[];
-                for (const i in new_hist) {
-                  new_new_hist.push(new_hist[i])
-
-                }
+                const hits=response.data.hits.hits.reverse()
 
 
-                
                 console.log(hits)
-                console.log(new_hist)
-                console.log(new_new_hist.reverse())
-                this.setState({timelinedata:new_new_hist});
+                this.setState({timelinedata:hits});
 
               })
 
@@ -129,9 +100,6 @@ class Timelines extends Component {
       console.log(timeline._source);
       let comentario;
       let estilo;
-      let fecha;
-      let hora;
-      
       if(timeline._source.ges_comentario_sv == "" || timeline._source.ges_comentario_sv == undefined ){
         comentario=""
         estilo="no"
@@ -141,57 +109,69 @@ class Timelines extends Component {
          estilo=""
       }
 
-      if(!timeline._source.ges_resultado){
+      if(!timeline._source.caso_ts_ult_ges){
         console.log("A "+index)
          // esta es la primera gestion
-         if(this.state.tipoFicha=="telefonia"){
+         var str = timeline._source.caso_ts_ult_ges;
+         //var res = str.split(".");
+         //var fecha = res[0];
 
-         }else if(this.state.tipoFicha=="web"){
-           //var str = timeline._source.caso_ts_ult_ges;
-           //var res = timeline._source.caso_ts_ult_ges.split("T");
-           fecha = moment(timeline._source.caso_ts_ult_ges).format("DD-MM-YYYY")
-           hora = timeline._source.caso_ts_ult_ges.split("T")
-         }
-         
-        /*{fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
-                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
-                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}*/
+         //var str2 = fecha;
+         console.log('........................... timeline._source.caso_ts_ult_ges\n');
+         console.log(timeline._source);
+         console.log('........................... timeline._source.caso_ts_ult_ges\n')
+
+         var res = timeline._source.caso_ts_ult_ges.split("T");
+         fecha = res[0]
+
+         var res2 = res[1].split(".");
+         fecha = fecha + ' ' + res2[0]
+
+         console.log(fecha)
+        
 
           return <div className="registro"  key={timeline._id}>
-                    <div className="fecha">
-                        
-
-                        {this.state.tipoFicha=="web" && fecha}
-                        {this.state.tipoFicha=="web" && " "+hora[1].slice(0,5)}
-                    
-                    </div>
+                    <div className="fecha">{fecha}</div>
                     <div className="marcano"></div>
                     <div className="actividad">
                         <div className="tag">Inicio</div>
                         
                     </div>
+                    
                   </div>
        
       }else{
         console.log("B "+index)
-        
-        
-        fecha = moment(timeline._source.caso_ts_ult_ges).format("DD-MM-YYYY")
-        hora = timeline._source.caso_ts_ult_ges.split("T")
+        let tipificacion;
+        if(timeline._source.ges_resultado!==undefined){
+         tipificacion=timeline._source.ges_resultado.replace("_"," ");
+        }
+        else{
+          tipificacion = "Inicio";
+        }
+
+        var str = timeline._source.caso_ts_ult_ges;
+        var res = str.split(".");
+        var fecha = res[0];
+
+        var str2 = fecha;
+        var res2 = str2.split("T");
+        fecha = res2[0]+' '+res2[1];
+
+        console.log(fecha)
+        //console.log(timeline._source.ges_resultado.replace("_"," "))
+
 
 
         return <div className="registro" key={timeline._id}>
-                    <div className="fecha"><div>
-                        {fecha}
-                        {" "}
-                        {hora[1].slice(0,5)}
-                    </div></div>
+                    <div className="fecha"><div>{fecha}</div></div>
                     <div className="marca"><div className="linea"></div></div>
                     <div className="actividad">
                         
-                        <div className="tag">{timeline._source.ges_resultado.replace("_"," ")}</div>
+                        <div className="tagtmln">{tipificacion}</div>
                         
                     </div>
+                    
                     <div className={"newcoment "+estilo} >
                         <div className=""> {comentario}</div>
                     </div>

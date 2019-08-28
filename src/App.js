@@ -309,12 +309,7 @@ class App extends Component {
                                     
                                       fecha = new Date(Number(element.datos_ficha.fecha_co))
                                 }
-                                /*if(dimencion==10){
-                                    fecha = new Date(Number(element.datos_ficha.fecha_co)*1000)
-                                } else {
-                                    fecha = new Date(Number(element.datos_ficha.fecha_co))
-                                    
-                                }*/
+                               
 
                                 
                                 console.log(fecha)

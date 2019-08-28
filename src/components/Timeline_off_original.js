@@ -53,7 +53,7 @@ class Timelines extends Component {
                               { "ges_ts": { "order" : "desc"}
                     }
                     ],
-          "_source": ["caso_ts_ult_ges", "ges_ts", "ges_resultado", "ges_comentario_sv"],
+          "_source": ["caso_ts", "ges_ts", "ges_resultado", "ges_comentario_sv"],
           "query": {
           "bool": {
             "should": [
@@ -79,38 +79,11 @@ class Timelines extends Component {
               .then(res => res.json())
               .then(response => {
                 console.log(response.data.hits.hits)
-                //const hits=response.data.hits.hits.reverse()
-                 const hits=response.data.hits.hits;
-
-                 const new_hist={};
-                
-
-                 hits.forEach(function(key) {
-                  new_hist[moment(key._source.caso_ts_ult_ges).format("X")] = key;
-                  
-                });
-
-                /* const ordered = {};
-                Object.keys(new_hist).sort().forEach(function(key) {
-                  ordered[key] = new_hist[key];
-                });
-
-                 (Object.keys(new_hist).reduce((accumulator, currentValue) => {
-                  accumulator[currentValue] = new_hist[currentValue];
-                  return accumulator;
-                }, {}));*/ 
-                const new_new_hist=[];
-                for (const i in new_hist) {
-                  new_new_hist.push(new_hist[i])
-
-                }
+                const hits=response.data.hits.hits.reverse()
 
 
-                
                 console.log(hits)
-                console.log(new_hist)
-                console.log(new_new_hist.reverse())
-                this.setState({timelinedata:new_new_hist});
+                this.setState({timelinedata:hits});
 
               })
 
@@ -129,9 +102,6 @@ class Timelines extends Component {
       console.log(timeline._source);
       let comentario;
       let estilo;
-      let fecha;
-      let hora;
-      
       if(timeline._source.ges_comentario_sv == "" || timeline._source.ges_comentario_sv == undefined ){
         comentario=""
         estilo="no"
@@ -144,25 +114,25 @@ class Timelines extends Component {
       if(!timeline._source.ges_resultado){
         console.log("A "+index)
          // esta es la primera gestion
-         if(this.state.tipoFicha=="telefonia"){
+         var str = timeline._source.caso_ts;
+         //var res = str.split(".");
+         //var fecha = res[0];
 
-         }else if(this.state.tipoFicha=="web"){
-           //var str = timeline._source.caso_ts_ult_ges;
-           //var res = timeline._source.caso_ts_ult_ges.split("T");
-           fecha = moment(timeline._source.caso_ts_ult_ges).format("DD-MM-YYYY")
-           hora = timeline._source.caso_ts_ult_ges.split("T")
-         }
-         
-        /*{fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
-                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
-                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}*/
+         //var str2 = fecha;
+         var res = timeline._source.caso_ts.split("T");
+         fecha = res[0]
+
+         console.log(fecha)
+        
 
           return <div className="registro"  key={timeline._id}>
                     <div className="fecha">
-                        
+                        {fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
+                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}
 
-                        {this.state.tipoFicha=="web" && fecha}
-                        {this.state.tipoFicha=="web" && " "+hora[1].slice(0,5)}
+                        {this.state.tipoFicha=="web" && moment(fecha).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="web" && " "+moment(fecha).format("HH:MM")}
                     
                     </div>
                     <div className="marcano"></div>
@@ -174,17 +144,28 @@ class Timelines extends Component {
        
       }else{
         console.log("B "+index)
-        
-        
-        fecha = moment(timeline._source.caso_ts_ult_ges).format("DD-MM-YYYY")
-        hora = timeline._source.caso_ts_ult_ges.split("T")
+        var fecha = timeline._source.caso_ts;
+        //
+        /*var res = str.split(".");
+        var fecha = res[0];
+
+        var str2 = fecha;
+        var res2 = str2.split("T");
+        fecha = res2[0]+' '+res2[1];
+
+        console.log(fecha)
+        console.log(timeline._source.ges_resultado.replace("_"," "))
+        */
 
 
         return <div className="registro" key={timeline._id}>
                     <div className="fecha"><div>
-                        {fecha}
-                        {" "}
-                        {hora[1].slice(0,5)}
+                        {fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
+                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}
+
+                        {this.state.tipoFicha=="web" && moment(fecha).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="web" && " "+moment(fecha).format("HH:MM")}
                     </div></div>
                     <div className="marca"><div className="linea"></div></div>
                     <div className="actividad">
