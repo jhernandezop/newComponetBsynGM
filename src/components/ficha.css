@@ -156,3 +156,18 @@
     padding: 5px;
 
 }
+
+.selecionada {
+    background: #00a09d;
+
+}
+
+.selecionada  .card-header {
+    background-color: #ffffff5c;
+}
+
+.selecionada .btn-light {
+    color: #212529;
+    background-color: #ffffff7d;
+    /* border-color: #ffffff; */
+}

@@ -4,16 +4,17 @@ import withDragAndDrop from 'react-big-calendar/lib/addons/dragAndDrop'
 import './Agenda.css';
 import 'react-big-calendar/lib/addons/dragAndDrop/styles.css'
 import moment from 'moment';
-import events from './events';
+//import events from './events';
 //import ExampleControlSlot from './ExampleControlSlot';
 import Draggable from 'react-draggable';
 require('moment/locale/es.js');
 
-//const propTypes = {}
-//const DragAndDropCalendar = withDragAndDrop(Calendar)
+const events = []
+const propTypes = {}
+const DragAndDropCalendar = withDragAndDrop(Calendar)
 
 class Agenda extends Component {
-/*
+
 	constructor(...args) {
 	    super(...args)
 
@@ -27,9 +28,22 @@ class Agenda extends Component {
     	this.newEvent = this.newEvent.bind(this)
 	  }
 
-	   componentDidMount(nextProps) {
-	   	console.log(nextProps)
-		}
+	componentDidMount(nextProps) {
+
+		const events = this.props.eventosAgenda
+		this.state.events=events
+	   	console.log(this.state)
+	}
+
+	componentWillReceiveProps(nextProps){
+   
+		const events = this.props.eventosAgenda
+		this.state.events=events
+	   	console.log(this.state)
+	    
+	}
+
+		
 
 	  moveEvent({ event, start, end, isAllDay: droppedOnAllDaySlot }) {
 	    const { events } = this.state
@@ -56,7 +70,7 @@ class Agenda extends Component {
 	  }
 
   resizeEvent = ({ event, start, end }) => {
-    const { events } = this.state
+    /*const { events } = this.state
 
     const nextEvents = events.map(existingEvent => {
       return existingEvent.id == event.id
@@ -66,7 +80,7 @@ class Agenda extends Component {
 
     this.setState({
       events: nextEvents,
-    })
+    })*/
 
     //alert(`${event.title} was resized to ${start}-${end}`)
   }
@@ -88,6 +102,8 @@ class Agenda extends Component {
 	    this.setState({
 	       events: this.state.events.concat([hour]),
 	    })}
+
+	    console.log(this.state.events)
 
 
   }
@@ -168,27 +184,22 @@ class Agenda extends Component {
                         <div className="btn-group btn-group-sm" role="group" >
                             <button type="button" className="btn btn-light" onClick={() => this.minimizar()}><i className="fas fa-window-minimize"></i></button>
                             <button type="button" className="btn btn-light" onClick={() => this.maximizar()}><i className="far fa-window-maximize"></i></button>
-                            <button type="button" className="btn btn-light" onClick={() => this.props.estadoAgenda()}><i class="fas fa-times"></i></button>
+                            <button type="button" className="btn btn-light" onClick={() => this.props.estadoAgenda()}><i className="fas fa-times"></i></button>
                         </div>
                 </div>
                 <div className={this.state.expandida ? 'detalleAgenda' : 'detalleAgenda minimizada'}>
-			        <ExampleControlSlot.Entry waitForOutlet>
-			          <strong>
-			            Click an event to see more info, or drag the mouse over the calendar
-			            to select a date/time range.
-			          </strong>
-			        </ExampleControlSlot.Entry>
+			 
 			        <Calendar
 			          selectable
 			          localizer={localizer}
-			          events={this.state.events}
+			          events={this.props.eventosAgenda}
 			          scrollToTime={new Date(1970, 1, 1, 6)}
 			          defaultDate={new Date(2019, 7, 5)}
-			          onSelectEvent={event => console.log(event)}
-			          onSelectSlot={this.handleSelect}
+			          //onSelectEvent={event => console.log(event)}
+			          //onSelectSlot={this.handleSelect}
 			          messages={{
-			              next: <i class="fas fa-angle-right"></i>,
-			              previous: <i class="fas fa-angle-left"></i>,
+			              next: <i className="fas fa-angle-right"></i>,
+			              previous: <i className="fas fa-angle-left"></i>,
 			              today: "Hoy",
 			              month: "Mes",
 			              week: "Semana",
@@ -207,36 +218,31 @@ class Agenda extends Component {
 		      	<div className="controlador">
 		      			<span className="indicador">Agenda</span>
                         <div className="btn-group btn-group-sm" role="group" >
-                            <button type="button" className="btn btn-light" onClick={() => this.minimizar()}><i class="fas fa-window-minimize"></i></button>
-                            <button type="button" className="btn btn-light" onClick={() => this.maximizar()}><i class="far fa-window-maximize"></i></button>
-                            <button type="button" className="btn btn-light" onClick={() => this.props.estadoAgenda()}><i class="fas fa-times"></i></button>
+                            <button type="button" className="btn btn-light" onClick={() => this.minimizar()}><i className="fas fa-window-minimize"></i></button>
+                            <button type="button" className="btn btn-light" onClick={() => this.maximizar()}><i className="far fa-window-maximize"></i></button>
+                            <button type="button" className="btn btn-light" onClick={() => this.props.estadoAgenda()}><i className="fas fa-times"></i></button>
                         </div>
                 </div>
                 <div className={this.state.expandida ? 'detalleAgenda' : 'detalleAgenda minimizada'}>
-			        <ExampleControlSlot.Entry waitForOutlet>
-			          <strong>
-			            Click an event to see more info, or drag the mouse over the calendar
-			            to select a date/time range.
-			          </strong>
-			        </ExampleControlSlot.Entry>
+			        
 			        <DragAndDropCalendar
 			          
 			          messages={{
-			              next: <i class="fas fa-angle-right"></i>,
-			              previous: <i class="fas fa-angle-left"></i>,
+			              next: <i className="fas fa-angle-right"></i>,
+			              previous: <i className="fas fa-angle-left"></i>,
 			              today: "Hoy",
 			              month: "Mes",
 			              week: "Semana",
 			              day: "Día"
 			            }}
-			          selectable
+			          //selectable
 				      localizer={localizer}
 				      events={this.state.events}
-				      onEventDrop={this.moveEvent}
-				      resizable
-				      onEventResize={this.resizeEvent}
-				      onSelectSlot={this.newEvent}
-				      onSelectEvent = {event => this.onSelectEvent(event)} //Fires selecting existing event
+				      //onEventDrop={this.moveEvent}
+				      //resizable
+				      //onEventResize={this.resizeEvent}
+				      //onSelectSlot={this.newEvent}
+				      //onSelectEvent = {event => this.onSelectEvent(event)} //Fires selecting existing event
 				      onDragStart={console.log}
 				      defaultView={Views.MONTH}
 				      defaultDate={new Date(2019, 7, 5)}
@@ -246,10 +252,8 @@ class Agenda extends Component {
 			)
       	}
 	}
-*/
-render() {
-	return (<div>agenda</div>)
-}
+
+
 }
 
 export default Agenda;

@@ -102,7 +102,7 @@ button.rbc-input::-moz-focus-inner {
     background: none;
     background-image: none;
     border: 1px solid #ccc;
-    padding: .375rem 1rem;
+    padding: .375rem 0.7rem;
     border-radius: 4px;
     line-height: normal;
     white-space: nowrap; }
@@ -637,4 +637,8 @@ button.rbc-input::-moz-focus-inner {
    height: 100% !important;
     width: 100% !important;
     padding-bottom: 70px !important;
+}
+
+#Agenda a{
+      color: #ffffff !important;
 }

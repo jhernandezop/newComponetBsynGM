@@ -99,7 +99,8 @@ class UnaFichaTelefonia extends Component {
           nro_gestion: "",
           timeline: this.props.datosFicha.timeline,
           tipo_caso:this.props.datosFicha.tipo,
-          tipificacion:this.props.datosFicha.tipificacion
+          tipificacion:this.props.datosFicha.tipificacion,
+          selcionada:this.props.datosFicha.selcionada
     }
   }
 
@@ -108,6 +109,7 @@ class UnaFichaTelefonia extends Component {
      this.setState({estado_proceso:nextProps.datosFicha.estado});
      this.setState({caso_CAM:nextProps.datosFicha.casoCAM});
      this.setState({nro_gestion:nextProps.datosFicha.nro_gestion});
+     this.setState({selcionada:nextProps.datosFicha.selcionada});
     
   }
 
@@ -217,7 +219,9 @@ class UnaFichaTelefonia extends Component {
   }
 
   render(){
-    const indicador_a=moment.unix(this.state.datos_ficha.fecha_co).format("DD-MM-YYYY");
+    //console.log(this.state.datos_ficha.fecha_co.length)
+    
+    
     const indicador_b=moment.unix(this.state.datos_ficha.fecha_co).format("HH:MM:SS");
     //const indicador=moment(this.state.datos_ficha.fecha_co.split("T", 2)
 
@@ -235,15 +239,20 @@ class UnaFichaTelefonia extends Component {
     //console.log(filtro.indexOf(estado_proceso))
     
     if(filtro.indexOf(estado_proceso)==-1 && filtro.indexOf(tipo_caso)==-1 && filtro.indexOf(this.state.tipificacion)==-1 && this.filtrarFicha(this.props.datosFicha)==true){
-      return ( <div className="card ficha"  onDoubleClick = {this.llamarFormulario}>
+      return ( <div className={this.state.selcionada ? 'selecionada card ficha' : 'card ficha'}  onDoubleClick = {this.llamarFormulario}>
              <div className="card-header" id="headingOne">
                 <h2 className="mb-0">
                   <button className="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapseOne_"+this.state.caso_ES.replace(".","")} aria-expanded="false" aria-controls={"collapseOne_"+this.state.caso_ES.replace(".","")}>
                     <div className="row">
                       <div className="col-12"><i className="fas fa-mobile-alt"></i> Telefónica</div>
                       <div className="col-12 cotizacion"><i className="far fa-hand-paper"></i> {this.state.caso_ES}</div>
-                      <div className="col-12"><i className="far fa-calendar-alt"></i> {indicador_a},   {indicador_b}</div>
-                      
+                      <div className="col-12"><i className="far fa-calendar-alt"></i>{" "}  
+                        {this.state.datos_ficha.fecha_co.length==10 && moment.unix(this.state.datos_ficha.fecha_co).format("DD-MM-YYYY")}
+                        {this.state.datos_ficha.fecha_co.length==10 && " "+moment.unix(this.state.datos_ficha.fecha_co).format("HH:MM:SS")}
+                        {this.state.datos_ficha.fecha_co.length==13 && moment.unix(this.state.datos_ficha.fecha_co/1000).format("DD-MM-YYYY")}
+                        {this.state.datos_ficha.fecha_co.length==13 && " "+moment.unix(this.state.datos_ficha.fecha_co/1000).format("HH:MM:SS")}
+                        
+                      </div>
                     </div>
                     
                     
@@ -293,7 +302,8 @@ class UnaFichaCotizacionWeb extends Component {
           nro_gestion: "",
           timeline: this.props.datosFicha.timeline,
           tipo_caso:this.props.datosFicha.tipo,
-          tipificacion:this.props.datosFicha.tipificacion
+          tipificacion:this.props.datosFicha.tipificacion,
+          selcionada:this.props.datosFicha.selcionada
     }
   }
 
@@ -302,6 +312,7 @@ class UnaFichaCotizacionWeb extends Component {
      this.setState({estado_proceso:nextProps.datosFicha.estado});
      this.setState({caso_CAM:nextProps.datosFicha.casoCAM});
      this.setState({nro_gestion:nextProps.datosFicha.nro_gestion});
+     this.setState({selcionada:nextProps.datosFicha.selcionada});
     
   }
 
@@ -428,14 +439,15 @@ class UnaFichaCotizacionWeb extends Component {
     //console.log(filtro.indexOf(estado_proceso))
     
     if(filtro.indexOf(estado_proceso)==-1 && filtro.indexOf(tipo_caso)==-1 && filtro.indexOf(this.state.tipificacion)==-1 && this.filtrarFicha(this.props.datosFicha)==true){
-      return ( <div className="card ficha"  onDoubleClick = {this.llamarFormulario}>
+      return ( <div className={this.state.selcionada ? 'selecionada card ficha' : 'card ficha'}  onDoubleClick = {this.llamarFormulario}>
              <div className="card-header" id="headingOne">
                 <h2 className="mb-0">
                   <button className="btn btn-link" type="button" data-toggle="collapse" data-target={"#collapseOne_"+this.state.caso_ES.replace(".","")} aria-expanded="false" aria-controls={"collapseOne_"+this.state.caso_ES.replace(".","")}>
                     <div className="row">
                       <div className="col-12"><i className="fas fa-globe"></i> Web</div>
                       <div className="col-12 cotizacion"><i className="far fa-hand-paper"></i> {detalle.cotizacion}</div>
-                      <div className="col-12"><i className="far fa-calendar-alt"></i> {moment(indicador[0]).format("DD-MM-YYYY")}, {indicador[1]}</div>
+                      <div className="col-12"><i className="far fa-calendar-alt"></i> 
+                        {moment(indicador[0]).format("DD-MM-YYYY")}, {indicador[1]}</div>
                       
                     </div>
                     

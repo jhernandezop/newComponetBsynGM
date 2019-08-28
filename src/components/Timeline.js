@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Timeline.css';  
-
+import moment from 'moment';
 
 
 class Timelines extends Component {
@@ -10,6 +10,7 @@ class Timelines extends Component {
     super(props);
     this.state = {
       timelinedata: [],
+      tipoFicha:"",
       uniqueid:""
     }
       //this.handleSubmit = this.handleSubmit.bind(this)
@@ -26,10 +27,11 @@ class Timelines extends Component {
 
     if(nextProps.edicion.length>=1){
 
-        console.log(nextProps.edicion[0].ficha.caso_ES)
+        console.log(nextProps.edicion[0].ficha)
         const uid=nextProps.edicion[0].ficha.caso_ES
         this.state.uniqueid=uid
-        console.log(this.state.uniqueid)
+        this.state.tipoFicha=nextProps.edicion[0].ficha.canal
+        console.log(this.state.tipoFicha)
         this.handleSubmit()
     }else{
       this.setState({timelinedata:[]});
@@ -124,7 +126,15 @@ class Timelines extends Component {
         
 
           return <div className="registro"  key={timeline._id}>
-                    <div className="fecha">{fecha}</div>
+                    <div className="fecha">
+                        {fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
+                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}
+
+                        {this.state.tipoFicha=="web" && moment(fecha).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="web" && " "+moment(fecha).format("HH:MM")}
+                    
+                    </div>
                     <div className="marcano"></div>
                     <div className="actividad">
                         <div className="tag">Inicio</div>
@@ -134,8 +144,9 @@ class Timelines extends Component {
        
       }else{
         console.log("B "+index)
-        var str = timeline._source.caso_ts;
-        var res = str.split(".");
+        var fecha = timeline._source.caso_ts;
+        //
+        /*var res = str.split(".");
         var fecha = res[0];
 
         var str2 = fecha;
@@ -144,11 +155,18 @@ class Timelines extends Component {
 
         console.log(fecha)
         console.log(timeline._source.ges_resultado.replace("_"," "))
-
+        */
 
 
         return <div className="registro" key={timeline._id}>
-                    <div className="fecha"><div>{res2[0]}</div></div>
+                    <div className="fecha"><div>
+                        {fecha.length==10 && this.state.tipoFicha=="telefonia" && moment.unix(fecha).format("DD-MM-YYYY")}
+                        {fecha.length==13 && this.state.tipoFicha=="telefonia" && moment.unix(fecha/1000).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="telefonia" && " "+moment.unix(fecha/1000).format("HH:MM")}
+
+                        {this.state.tipoFicha=="web" && moment(fecha).format("DD-MM-YYYY")}
+                        {this.state.tipoFicha=="web" && " "+moment(fecha).format("HH:MM")}
+                    </div></div>
                     <div className="marca"><div className="linea"></div></div>
                     <div className="actividad">
                         

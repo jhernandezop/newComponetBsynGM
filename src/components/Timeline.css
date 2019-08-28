@@ -100,9 +100,9 @@
 .registro{
     margin-bottom: 0px;}
 .registro > div{display: inline-flex;}
-.fecha{width: 62px;}
+.fecha{width: 62px; text-align: right;}
 
-.fecha div{display: block;}
+.fecha div{display: block; text-align: right;}
 
 .marcano{
     background: #1d906c;
@@ -172,6 +172,7 @@
 
     background: #CCC;
     min-width: 35px;
+    max-width: 103px;
     height: 26px;
     padding: 4px;
     overflow: hidden;

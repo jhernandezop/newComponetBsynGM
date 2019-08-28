@@ -217,7 +217,7 @@ class AreaEdicion extends Component {
         items_doc_data["ges_resultado"]=event.data.select
         items_doc_data["ges_rut_asesor_piso"]=event.data.ejecutivoDePiso
         items_doc_data["ges_sucursal_agenda"]=datos_ejecutivo[0]
-        items_doc_data["ges_ts"]=this.props.formulario[0].datosFormulario.ges_ts
+        items_doc_data["ges_ts"]=this.props.formulario[0].datosFormulario.caso_ts
         items_doc_data["ges_tso"]=moment().format('YYYY-MM-DDTHH:mm:ss')
         items_doc_data["ges_user"]=this.props.anexo
         
@@ -234,7 +234,7 @@ class AreaEdicion extends Component {
         items_doc_data["ges_rut_asesor_piso"]=""
         items_doc_data["ges_sucursal_agenda"]=""
         items_doc_data["ges_tso"]=moment().format('YYYY-MM-DDTHH:mm:ss')
-        items_doc_data["ges_ts"]=this.props.formulario[0].datosFormulario.ges_ts
+        items_doc_data["ges_ts"]=this.props.formulario[0].datosFormulario.caso_ts
         items_doc_data["ges_user"]=this.props.anexo
 
     }

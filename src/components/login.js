@@ -24,11 +24,22 @@ class Login extends Component {
   console.log(err);
 });*/
 
+  componentDidMount() {
+    const variables_sesion=JSON.parse(localStorage.getItem("constantes"))
+    if(variables_sesion.usuario!="" && variables_sesion.clave!=""){
+      document.getElementById("id_pass").value = variables_sesion.usuario
+      document.getElementById("pass").value = variables_sesion.clave
+      document.getElementById("login").click();
+      document.getElementById("login").setAttribute("disabled","disabled");
+    }
+  }
+
   login= ()=> {
 
     
     const usuario=document.getElementById("id_pass").value
     const clave=document.getElementById("pass").value
+    //console.log(localStorage.getItem("constantes"))
     //return false;
 
     fetch("https://bsadmin.openpartner.cl/gdm", {
@@ -61,6 +72,10 @@ class Login extends Component {
 
             if(response.data[4].contraseña==clave && response.data[4].usuario==usuario && response.data[4].anexo!=""){
               this.props.estadoLogin(response.data[4])
+              const variables_sesion= JSON.parse(localStorage.getItem("constantes"))
+              variables_sesion.usuario=usuario;
+              variables_sesion.clave=clave;
+              localStorage.setItem("constantes", JSON.stringify(variables_sesion))
               
             }else{
               //alert("invalido")

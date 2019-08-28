@@ -7,7 +7,7 @@ import ConstruirFichas from './components/ConstruirFichas';
 import AreaEdicion from './components/AreaEdicion';
 import ProcesoManual from './components/ProcesoManual';
 import Vertelefono from './components/VerTelefono';
-//import Agenda from './components/Agenda';
+import Agenda from './components/Agenda';
 import Search from './components/Search';
 import Timelines from './components/Timeline';
 import ReporteUsuario from './components/ReporteUsuario';
@@ -31,6 +31,7 @@ class App extends Component {
        interfaz:"gestion",
        grupos:[],
        fichas:[],
+       peticionFichas:false,
        fichasEnCola:0,
        fichasDescartadas:0,
        fichasExito:0,
@@ -51,12 +52,12 @@ class App extends Component {
                           opcion:"fas fa-chart-line", 
                           funcion:"reporte",
                           ver: false
-                        }/*,
+                        },
                         {
                           opcion:"far fa-calendar-alt", 
                           funcion:"agenda",
                           ver: true
-                        }*/,
+                        },
                         {
                           opcion:"fa fa-headset", 
                           funcion:"telefono",
@@ -105,13 +106,7 @@ class App extends Component {
        procesomanualFiltro:[],
        searchFiltro:"",
        uniqueid:"",
-       eventosAgenda:[{
-                      id: 0,
-                      title: 'All Day Event very long title',
-                      allDay: true,
-                      start: new Date(2015, 3, 0),
-                      end: new Date(2015, 3, 1),
-                    }]
+       eventosAgenda:[]
 
 
      }
@@ -162,6 +157,14 @@ class App extends Component {
   pedirFichasNuevas(){
     console.log("PIDIENDO")
 
+    if(this.state.peticionFichas==true){
+      return false;
+    }else{
+      this.state.peticionFichas=true
+       //this.setState({peticionFichas:true});
+    
+
+
     var url = 'https://bscore.openpartner.cl/gdm%22,%7B';
     var data = {
                   "tx"      : "getTs",
@@ -180,7 +183,7 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(response => {if(response){
-                    
+                     this.state.peticionFichas=false
                     const encontre="no"
                     
                     if(response.estatus=="OK"){
@@ -204,7 +207,7 @@ class App extends Component {
                     }
 
                     }})
-
+    }
 
    }
 
@@ -215,6 +218,14 @@ class App extends Component {
     //console.log(this.state.anexo)
     // PIDO FICHASSS
     //return false;
+    console.log(this.state.peticionFichas)
+    if(this.state.peticionFichas==true){
+      return false;
+    }else{
+      this.state.peticionFichas=true
+
+    
+
     var url = 'https://bscore.openpartner.cl/gdm%22,%7B';
     var data = {
                   "tx"      : "getTs",
@@ -233,8 +244,10 @@ class App extends Component {
     })
     .then(res => res.json())
     .then(response => {if(response){
+                    this.state.peticionFichas=false
                     console.log(response.casos);
                      const agrupaciones = []  
+                     const agendamientos = []
                     if(response.estatus=="OK"){
                       
                      
@@ -255,7 +268,7 @@ class App extends Component {
                         }else if( element.estado=="agendado_propio"){
                            element.estado="agendado";
                         }
-                        
+                        element["selcionada"]=false
                         //element.tipo_caso="Seguimiento"
                         //element["tipificacion"]="sin respuesta";
 
@@ -268,8 +281,61 @@ class App extends Component {
                               //console.log(agrupaciones.indexOf(element.estado_proceso))
                         }
 
-                      }); 
+                        //AGENDAMIENTO
+                        /**/
+                        console.log(element.estado)
+                        console.log(element.canal)
+                        
+                        if(element.estado=="agendado"){
+                        console.log(element.datos_ficha.fecha_co+"/"+element.datos_ficha.fecha_co.length)
+                              if(element.canal=="web"){
+                                const fecha = new Date(element.datos_ficha.fecha_co)
+                                agendamientos.push({
+                                    id: element.caso,
+                                    title: element.datos_ficha.cotizacion+"("+element.datos_ficha.nombre+")",
+                                    allDay: false,
+                                    start: fecha,
+                                    end: fecha,
+                                })
 
+                              }else if(element.canal=="telefonia"){
+                                const dimencion =element.datos_ficha.fecha_co.length 
+                                console.log(dimencion); console.log(element.datos_ficha.fecha_co)
+                                let fecha=""
+                                if(dimencion==10){
+                                    
+                                     fecha = new Date(Number(element.datos_ficha.fecha_co)*1000)
+                                }else if(dimencion==13){
+                                    
+                                      fecha = new Date(Number(element.datos_ficha.fecha_co))
+                                }
+                                /*if(dimencion==10){
+                                    fecha = new Date(Number(element.datos_ficha.fecha_co)*1000)
+                                } else {
+                                    fecha = new Date(Number(element.datos_ficha.fecha_co))
+                                    
+                                }*/
+
+                                
+                                console.log(fecha)
+                                agendamientos.push({
+                                    id: element.caso,
+                                    title: element.caso,
+                                    allDay: false,
+                                    start: fecha,
+                                    end:fecha,
+                                })
+                              }
+
+                                  
+
+                        }
+
+
+
+                      }); 
+                      console.log(agendamientos)
+                      this.state.eventosAgenda=agendamientos;
 
                       /*const grupo_fichas = response.casos.map((number) =>
             
@@ -496,8 +562,7 @@ fetch(url, {
 
 
 
-
-
+}
 
 
 
@@ -717,12 +782,29 @@ fetch(url, {
   desplegarEdicion(accion, datosFormulario, ficha) {
     //console.log(datosFormulario)
     console.log(accion)
-    if(accion=="limpiar"){
+    if(accion=="limpiar" || accion==""){
       this.setState({edicion:[]});
     }else if(accion=="cargar"){
       this.setState({edicion:[{"ficha": ficha, "datosFormulario":datosFormulario}]});
-    }
-   
+    
+
+      console.log(ficha)
+      const ficha_selecionada = ficha.caso_ES
+      const fichas_actuales=this.state.fichas 
+      fichas_actuales.forEach(function(element_a, index_a) {
+
+        if(element_a.caso==ficha_selecionada){
+          element_a.selcionada=true
+
+        }else{
+          element_a.selcionada=false
+        }
+        console.log(element_a.selcionada); console.log(ficha_selecionada)
+
+      })
+      this.setState({fichas:fichas_actuales})
+     
+   }
 
 
   }
@@ -847,6 +929,13 @@ fetch(url, {
   navegarInterfaz(opcion){
   
     if(opcion=="salir"){
+
+      const variables_sesion=JSON.parse(localStorage.getItem("constantes"))
+      if(variables_sesion.usuario!="" && variables_sesion.clave!=""){
+        variables_sesion.usuario = ""
+        variables_sesion.clave = ""
+        localStorage.setItem("constantes", JSON.stringify(variables_sesion))
+      }
       this.setState({estadoLogin:false})
       this.setState({interfaz:"gestion"})
       this.setState({edicion:""})
@@ -903,7 +992,10 @@ fetch(url, {
           
 
           {this.state.verTelefono ==true && <Vertelefono estadoTelefono={this.estadoTelefono} actualizarUniqueid={this.actualizarUniqueid} anexo={this.state.anexo} />}
-          
+           {this.state.verAgenda ==true && <Agenda  
+                                              estadoAgenda={this.estadoAgenda} 
+                                              eventosAgenda={this.state.eventosAgenda}
+                                          />}
           
           <div className="row">
             <div className="col-12">

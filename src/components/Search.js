@@ -27,7 +27,7 @@ class Search extends Component {
   }
 
   actualizarSubFiltros(procesomanual){
-   // console.log(this.props.procesomanual)
+    console.log(this.props.procesomanual)
     procesomanual=this.props.procesomanual
     const subFiltros=[]
     procesomanual.forEach(function(a, index_a) {
@@ -44,7 +44,7 @@ class Search extends Component {
         })
     })
     this.setState({subFiltros: subFiltros});
-    //console.log(subFiltros)
+    console.log(subFiltros)
 
   }
 

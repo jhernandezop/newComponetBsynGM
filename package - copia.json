@@ -1,0 +1,43 @@
+{
+  "name": "electron-with-create-react-app",
+  "version": "0.1.0",
+  "description": "Electron app powered by CRA",
+  "author": "OSS Community",
+  "private": true,
+  "devDependencies": {
+    "electron": "^1.4.15",
+    "electron-builder": "^13.6.0",
+    "foreman": "^2.0.0",
+    "react-scripts": "^0.9.0"
+  },
+  "dependencies": {
+    "moment": "^2.24.0",
+    "react": "^15.6.2",
+    "react-big-calendar": "^0.22.0",
+    "react-date-range": "^0.9.4",
+    "react-dom": "^15.6.2",
+    "react-draggable": "^3.3.1",
+    "react-formio": "^3.1.12",
+    "react-tackle-box": "^2.1.0",
+    "vertical-timeline-component-for-react": "^1.0.6"
+  },
+  "homepage": "./",
+  "main": "src/electron-starter.js",
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "electron": "electron .",
+    "dev": "nf start -p 3000",
+    "pack": "build --dir",
+    "dist": "npm run build && build",
+    "postinstall": "install-app-deps"
+  },
+  "build": {
+    "appId": "com.electron.electron-with-create-react-app",
+    "directories": {
+      "buildResources": "public"
+    }
+  }
+}
