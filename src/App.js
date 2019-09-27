@@ -42,11 +42,11 @@ class App extends Component {
                           opcion:"fab fa-trello", 
                           funcion:"gestion",
                           ver: false
-                        },{
+                        },/*{
                           opcion:"far fa-calendar-alt", 
                           funcion:"agenda",
                           ver: false
-                        },
+                        },*/
                         {
                           opcion:"fa fa-headset", 
                           funcion:"telefono",
@@ -980,11 +980,11 @@ fetch(url, {
                           funcion:"gestion",
                           ver: false
                         },
-                        {
+                        /*{
                           opcion:"far fa-calendar-alt", 
                           funcion:"agenda",
                           ver: false
-                        },
+                        },*/
                         {
                           opcion:"fa fa-headset", 
                           funcion:"telefono",
