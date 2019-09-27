@@ -70,7 +70,7 @@ class Login extends Component {
           //console.log(response.data[4].contraseña+"/"+clave)
           if(response.estatus=="OK"){
 
-            if(response.data[4].contraseña==clave && response.data[4].usuario==usuario && response.data[4].anexo!=""){
+            if(response.data[4].contraseña==clave && response.data[4].usuario==usuario ){
               this.props.estadoLogin(response.data[4])
               const variables_sesion= JSON.parse(localStorage.getItem("constantes"))
               variables_sesion.usuario=usuario;

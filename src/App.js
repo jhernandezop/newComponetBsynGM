@@ -28,7 +28,7 @@ class App extends Component {
        anexo:"",
        tipoUsuario:"",
        ejecutivos:[],
-       interfaz:"gestion",
+       interfaz:"",
        grupos:[],
        fichas:[],
        peticionFichas:false,
@@ -41,11 +41,20 @@ class App extends Component {
                         {
                           opcion:"fab fa-trello", 
                           funcion:"gestion",
-                          ver: true
+                          ver: false
+                        },{
+                          opcion:"far fa-calendar-alt", 
+                          funcion:"agenda",
+                          ver: false
+                        },
+                        {
+                          opcion:"fa fa-headset", 
+                          funcion:"telefono",
+                          ver: false
                         },
                         {
                           opcion:"fas fa-chart-pie", 
-                          funcion:"reporte_superivisor",
+                          funcion:"reportes_supervisor",
                           ver: false
                         },
                         {
@@ -53,16 +62,7 @@ class App extends Component {
                           funcion:"reporte",
                           ver: false
                         },
-                        {
-                          opcion:"far fa-calendar-alt", 
-                          funcion:"agenda",
-                          ver: true
-                        },
-                        {
-                          opcion:"fa fa-headset", 
-                          funcion:"telefono",
-                          ver: true
-                        },
+                        
                         {
                           opcion:"fas fa-user-times", 
                           funcion:"salir",
@@ -351,6 +351,11 @@ class App extends Component {
                        //response.casos[2].tipificacion="en seguimiento"
                        //response.casos[4].tipificacion="en seguimiento"
                       //console.log(response.casos)
+
+                      //REORDENAMIENTO
+
+                      //REORDENAMIENTO
+
                       this.actualizarFichas(response.casos, agrupaciones, "")
                       //console.log("PASSSSSSS")
                       
@@ -662,12 +667,15 @@ fetch(url, {
 
     if(data.anexo!=""){
       this.setState({anexo:data.anexo});
-      this.setState(state => ({
-        estadoLogin: !state.estadoLogin
-      }));
       this.pedirFichas();
+      
       this.pedirEjecutivos();
+    }
 
+    if(data.anexo!=""){
+      this.setState({interfaz:"gestion"});
+    }else if(data.anexo==""){
+      this.setState({interfaz:"reportes_supervisor"});
     }
 
     const opcionesActuales=this.state.opcionesOsuario
@@ -675,18 +683,24 @@ fetch(url, {
       console.log(element_a)
       console.log(opcionesActuales)
       if(element_a.tag=="reportes_supervisor"){
-          opcionesActuales[1].ver=true
-      }
+          opcionesActuales[3].ver=true
+          
 
+      }
       if(element_a.tag=="reportes_usuario"){
-         opcionesActuales[2].ver=true
+         opcionesActuales[4].ver=true
 
       }
-
-
-
+      if(element_a.tag=="face"){
+         opcionesActuales[0].ver=true
+         opcionesActuales[1].ver=true
+         opcionesActuales[2].ver=true
+         
+      }
     })
-    
+    this.setState(state => ({
+        estadoLogin: !state.estadoLogin
+    }));
     
   }
 
@@ -958,8 +972,41 @@ fetch(url, {
         localStorage.setItem("constantes", JSON.stringify(variables_sesion))
       }
       this.setState({estadoLogin:false})
-      this.setState({interfaz:"gestion"})
+      this.setState({interfaz:""})
       this.setState({edicion:""})
+      this.setState({opcionesOsuario:[
+                        {
+                          opcion:"fab fa-trello", 
+                          funcion:"gestion",
+                          ver: false
+                        },
+                        {
+                          opcion:"far fa-calendar-alt", 
+                          funcion:"agenda",
+                          ver: false
+                        },
+                        {
+                          opcion:"fa fa-headset", 
+                          funcion:"telefono",
+                          ver: false
+                        },
+                        {
+                          opcion:"fas fa-chart-pie", 
+                          funcion:"reportes_supervisor",
+                          ver: false
+                        },
+                        {
+                          opcion:"fas fa-chart-line", 
+                          funcion:"reporte",
+                          ver: false
+                        },
+                        {
+                          opcion:"fas fa-user-times", 
+                          funcion:"salir",
+                          ver: true
+                        }
+                       ]})
+     
       
     }else if(opcion=="telefono"){
 
@@ -1013,7 +1060,7 @@ fetch(url, {
           
 
           {this.state.verTelefono ==true && <Vertelefono estadoTelefono={this.estadoTelefono} actualizarUniqueid={this.actualizarUniqueid} anexo={this.state.anexo} />}
-           {this.state.verAgenda ==true && <Agenda  
+          {this.state.verAgenda ==true && <Agenda  
                                               estadoAgenda={this.estadoAgenda} 
                                               eventosAgenda={this.state.eventosAgenda}
                                           />}
@@ -1174,7 +1221,7 @@ fetch(url, {
           </div>
         </div>
       );
-    }else if(this.state.estadoLogin==true &&  this.state.interfaz=="reporte_superivisor"){
+    }else if(this.state.estadoLogin==true &&  this.state.interfaz=="reportes_supervisor"){
       return (
         <div className="container-fluid h-100">
           <div className="row">
@@ -1192,7 +1239,25 @@ fetch(url, {
           </div>
         </div>
       );
-    }  
+    } else if(this.state.estadoLogin==true &&  this.state.interfaz==""){
+      return (
+        <div className="container-fluid h-100">
+          <div className="row">
+            <div className="col-12">
+                        <OpcioneDeNavegacion  
+                          opciones={this.state.opcionesOsuario} 
+                          interfazExpandida={this.interfazExpandida} 
+                          estado={this.state.expandida}
+                          navegarInterfaz={this.navegarInterfaz}
+                        />
+            </div>
+          </div>
+          <div id="contenedor_app" className="row h-100 ">
+                
+          </div>
+        </div>
+      );
+    } 
   }
 }
 
