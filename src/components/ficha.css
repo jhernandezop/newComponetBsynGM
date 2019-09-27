@@ -171,3 +171,22 @@
     background-color: #ffffff7d;
     border:0px !important; 
 }
+
+.selecionada {
+    background: #00a09d;
+    margin-bottom: 10px!important;
+    border-radius: 2px !important;
+    box-shadow: -4px 4px 14px 0px rgb(0, 160, 157) !important;
+    padding: 1.3px!important;
+}
+
+.selecionada  .card-body {
+    background-color:#efefef!important;
+}
+/*
+.selecionada .btn-light {
+    color: #212529;
+    background-color: #ffffff7d;
+    border:0px !important; 
+}
+*/
