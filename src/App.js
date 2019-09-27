@@ -673,7 +673,7 @@ fetch(url, {
     }
 
     if(data.anexo!=""){
-      this.setState({interfaz:"gestion"});
+      this.setState({interfaz:(data.permisos[0].tag=="face" ? 'gestion' : data.permisos[0].tag)});
     }else if(data.anexo==""){
       this.setState({interfaz:"reportes_supervisor"});
     }
@@ -683,18 +683,18 @@ fetch(url, {
       console.log(element_a)
       console.log(opcionesActuales)
       if(element_a.tag=="reportes_supervisor"){
-          opcionesActuales[3].ver=true
+          opcionesActuales[2].ver=true
           
 
       }
       if(element_a.tag=="reportes_usuario"){
-         opcionesActuales[4].ver=true
+         opcionesActuales[3].ver=true
 
       }
       if(element_a.tag=="face"){
          opcionesActuales[0].ver=true
          opcionesActuales[1].ver=true
-         opcionesActuales[2].ver=true
+         //opcionesActuales[2].ver=true
          
       }
     })
