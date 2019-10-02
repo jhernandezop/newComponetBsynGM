@@ -36,7 +36,22 @@ class ConstruirFichas extends Component {
     this.setState({fichas:[]});
     if(nextProps){
       console.log(nextProps.fichas)
-      this.setState({fichas:nextProps.fichas});
+      const fichas=nextProps.fichas;
+      //ORDENAMIENO
+          //ORDENO EN OBJETO
+          const new_hist={};
+          fichas.forEach(function(key) {
+            new_hist[key.key_orden] = key;
+          });
+          //COBVIERTO EN ARRAY
+          const new_new_hist=[];
+          for (const i in new_hist) {
+            new_new_hist.push(new_hist[i])
+          }
+          console.log(nextProps.fichas, new_new_hist )
+      //FIN ORDENAMIENTO
+      this.setState({fichas:new_new_hist.reverse()});
+      //this.setState({fichas:nextProps.fichas});
     }
     console.log(this.state.fichas)
     

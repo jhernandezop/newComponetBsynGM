@@ -271,8 +271,11 @@ class App extends Component {
                         element["selcionada"]=false
                         //element.tipo_caso="Seguimiento"
                         //element["tipificacion"]="sin respuesta";
-
-                        
+                        if(element.canal=="web"){
+                          element["key_orden"]=moment(element.datos_ficha.fecha_co).format("X");
+                        }else if(element.canal=="telefonia"){
+                           element["key_orden"]=moment.unix(element.datos_ficha.fecha_co/1000).format("X");
+                        }
                         if(agrupaciones.indexOf(element.estado_proceso)<0){
                                 agrupaciones.push(element.estado_proceso)
                                 //overlays.push({"ID_ETAPA_PROCESO":element.estado_proceso, "NOTA":1 })
