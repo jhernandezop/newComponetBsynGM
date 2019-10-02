@@ -424,7 +424,7 @@ class App extends Component {
 
       if(response.estatus=="OK" && response.data){
                   console.log(response.data.aggregations.cotizaciones.buckets["En Cola"].doc_count)
-                  var total=response.data.aggregations.cotizaciones.buckets["En Cola"].doc_count 
+                  var total=response.data.aggregations.cotizaciones.buckets["En Cola"].unicas.value 
                    this.setState({fichasEnCola:total});
 
       }
