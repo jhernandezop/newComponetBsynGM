@@ -23,6 +23,7 @@ class App extends Component {
        expandida: true,
        estadoLogin:false,
        tipoLogin:"standar",
+       area:"",
        verTelefono: false,
        verAgenda:false,
        anexo:"",
@@ -42,11 +43,11 @@ class App extends Component {
                           opcion:"fab fa-trello", 
                           funcion:"gestion",
                           ver: false
-                        },/*{
+                        },/**/{
                           opcion:"far fa-calendar-alt", 
                           funcion:"agenda",
                           ver: false
-                        },*/
+                        },
                         {
                           opcion:"fa fa-headset", 
                           funcion:"telefono",
@@ -292,7 +293,8 @@ class App extends Component {
                         if(element.estado=="agendado"){
                         console.log(element.datos_ficha.fecha_co+"/"+element.datos_ficha.fecha_co.length)
                               if(element.canal=="web"){
-                                const fecha = new Date(element.datos_ficha.fecha_co)
+                                const fecha = new Date(moment(element.fecha_agendada+" "+element.hora_agendada).format("YYYY-MM-DDTHH:MM:SS"))
+                                console.log(moment(element.fecha_agendada+" "+element.hora_agendada).format("YYYY-MM-DDTHH:MM:SS"))
                                 agendamientos.push({
                                     id: element.caso,
                                     title: element.datos_ficha.cotizacion+"("+element.datos_ficha.nombre+")",
@@ -302,19 +304,8 @@ class App extends Component {
                                 })
 
                               }else if(element.canal=="telefonia"){
-                                const dimencion =element.datos_ficha.fecha_co.length 
-                                console.log(dimencion); console.log(element.datos_ficha.fecha_co)
-                                let fecha=""
-                                if(dimencion==10){
-                                    
-                                     fecha = new Date(Number(element.datos_ficha.fecha_co)*1000)
-                                }else if(dimencion==13){
-                                    
-                                      fecha = new Date(Number(element.datos_ficha.fecha_co))
-                                }
-                               
-
                                 
+                                const fecha = new Date(moment(element.fecha_agendada+" "+element.hora_agendada).format("YYYY-MM-DDTHH:MM:SS"))
                                 console.log(fecha)
                                 agendamientos.push({
                                     id: element.caso,
@@ -668,6 +659,8 @@ fetch(url, {
     this.setState({edicion:""})
     console.log(data)
 
+    this.setState({area:data.area})
+
     if(data.anexo!=""){
       this.setState({anexo:data.anexo});
       this.pedirFichas();
@@ -697,7 +690,7 @@ fetch(url, {
       if(element_a.tag=="face"){
          opcionesActuales[0].ver=true
          opcionesActuales[1].ver=true
-         //opcionesActuales[2].ver=true
+         opcionesActuales[2].ver=true
          
       }
     })
@@ -983,11 +976,11 @@ fetch(url, {
                           funcion:"gestion",
                           ver: false
                         },
-                        /*{
+                        {
                           opcion:"far fa-calendar-alt", 
                           funcion:"agenda",
                           ver: false
-                        },*/
+                        },
                         {
                           opcion:"fa fa-headset", 
                           funcion:"telefono",
@@ -1066,6 +1059,13 @@ fetch(url, {
           {this.state.verAgenda ==true && <Agenda  
                                               estadoAgenda={this.estadoAgenda} 
                                               eventosAgenda={this.state.eventosAgenda}
+
+                                              //llamafichaDesdeAgenda={this.llamafichaDesdeAgenda}
+                                              edicion={this.state.edicion}
+                                              anexo={this.state.anexo}
+                                              pedirFichas={this.pedirFichas}
+                                              desplegarEdicion={this.desplegarEdicion}
+                                              area={this.state.area}
                                           />}
           
           <div className="row">
@@ -1183,7 +1183,7 @@ fetch(url, {
                                   pedirFichas={this.pedirFichas}
                                   desplegarEdicion={this.desplegarEdicion}
                                   uniqueid={this.state.uniqueid}
-
+                                  area={this.state.area}
                                  />
 
                           </div>
@@ -1196,7 +1196,10 @@ fetch(url, {
                   
                       <div className="row h-25" ></div>
                       <div id="lineadetiempo" className="row h-75" >
-                        <Timelines  edicion={this.state.edicion}/>
+                        <Timelines  
+                          edicion={this.state.edicion} 
+                          area={this.state.area}
+                        />
                       </div>
                   
                   

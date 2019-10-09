@@ -642,3 +642,79 @@ button.rbc-input::-moz-focus-inner {
 #Agenda a{
       color: #ffffff !important;
 }
+
+#Agenda .agendamiento{
+    background: #ffffffd6;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0px;
+    z-index: 500;
+    margin: 0px;
+    margin-top: 36px;
+    padding: 50px;
+}
+
+#Agenda .card-body, #Agenda .form-control{
+  font-size: 10px;
+}
+
+#Agenda legend{
+  margin-bottom: 00px;
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#Agenda label {
+    display: inline-block;
+    margin-bottom: .1rem;
+}
+
+#Agenda .formio-form fieldset {
+    background-color: #FFF;
+    margin-bottom: 0px;
+    box-shadow: -2px 5px 12px 1px rgba(0, 0, 0, 0.2);
+    
+}
+#Agenda .formio-form {
+    margin-top: 49px;
+}
+#Agenda .card-body{
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+#Agenda .formio-component-submit{
+  background-color: #FFF;
+   box-shadow: 0px 5px 8px 2px rgba(0, 0, 0, 0.2);
+   
+}
+
+#Agenda .formio-component-submit button{
+width: 100%;
+padding: 3px;
+border-radius: 0px;
+} 
+
+
+#Agenda legend {
+  font-size: 20px;
+  text-align: center;
+  padding: 10px;
+}
+
+#Agenda .agendamiento .btn-light{
+    position: absolute;
+    right: 52px;
+    top: 101px;
+    z-index: 6;
+    font-size: 8px;
+    padding: 2px 6px;
+    background: crimson;
+    color: #FFF;
+}
+
+#Agenda .agendamiento .btn-light:hover{
+  cursor:pointer;
+}

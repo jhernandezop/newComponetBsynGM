@@ -119,13 +119,15 @@ class AreaEdicion extends Component {
 
         //RESULTADO DE LA LLAMADA
         seguimiento.components[0].components[2].columns[0].components[0].data.values=ejecutivos
-        //console.log(seguimiento.components[0].components[2].columns[0].components[0].data.values)
+        console.log(seguimiento.components[0].components[2].columns[0].components[0].data.values)
         
         this.state.detalleLLamada=newForm
       
       }else if(nuevoFormulario.formulario[0].ficha.canal=="telefonia"){
         this.state.formulario="detalletelefonia";
         const newForm=detalletelefonia 
+        seguimiento.components[0].components[2].columns[0].components[0].data.values=ejecutivos
+        console.log(seguimiento.components[0].components[2].columns[0].components[0].data.values)
         //PESTAÑA INFO CLIENTE = detalleLLamada.components[0].components[0]
 		newForm.components[0].components[0].components[0].defaultValue=f.doc_nu_documento
         newForm.components[0].components[0].components[1].defaultValue=f.doc_nombre
@@ -192,6 +194,7 @@ class AreaEdicion extends Component {
      //const fecha_seguimiento="";
      //const fechas_seguimiento="";
      const items_doc_data={}
+
     if(event.data.select=="agendamiento_tercero"){
 
 
@@ -214,8 +217,8 @@ class AreaEdicion extends Component {
         items_doc_data["ges_comentario_sv"]=event.data.comentarios
         items_doc_data["ges_comuna_agenda"]=datos_ejecutivo[1]
         items_doc_data["ges_comentario_gestion"]=event.data.comentarioAEjecutivo
-        items_doc_data["ges_fecha_next"]=event.data.fechaDeAgendamiento.slice(0, 10)
-        items_doc_data["ges_hora_next"]=event.data.fechaDeAgendamiento.slice(11, 18)
+        items_doc_data["ges_fecha_agendamiento"]=event.data.fechaDeAgendamiento.slice(0, 10)
+        items_doc_data["ges_hora_agendamiento"]=event.data.fechaDeAgendamiento.slice(11, 18)
         items_doc_data["ges_resultado"]=event.data.select
         items_doc_data["ges_rut_asesor_piso"]=event.data.ejecutivoDePiso
         items_doc_data["ges_sucursal_agenda"]=datos_ejecutivo[0]
@@ -230,8 +233,8 @@ class AreaEdicion extends Component {
         items_doc_data["ges_comentario_sv"]=event.data.comentarios
         items_doc_data["ges_comuna_agenda"]=""
         items_doc_data["ges_comentario_gestion"]=""
-        items_doc_data["ges_fecha_next"]=""
-        items_doc_data["ges_hora_next"]=""
+        items_doc_data["ges_fecha_agendamiento"]=""
+        items_doc_data["ges_hora_agendamiento"]=""
         items_doc_data["ges_resultado"]=event.data.select
         items_doc_data["ges_rut_asesor_piso"]=""
         items_doc_data["ges_sucursal_agenda"]=""
@@ -294,7 +297,7 @@ class AreaEdicion extends Component {
                     console.log(transaccion)
 
           var url = 'https://bscore.openpartner.cl/gdm';
-         //return false;
+         return false;
             fetch(url, {
               method: 'POST', 
               body: JSON.stringify(transaccion), 
@@ -375,30 +378,38 @@ actualizarGestionData(event){
 /*{formulario}*/
     if(this.state.expandida==true ){
 
-           
-       
-            return (
-
-              <div id="contenedorFormularios"  className='row contenedorFormularios'>
-                
-                {this.state.formulario=="detalleLLamada" && <Form form={this.state.detalleLLamada} onChange={(schema) => this.actualizarGestionData(schema)} onSubmit={this.actualizar} />}
-                {this.state.formulario=="detalletelefonia" && <Form form={detalletelefonia} onChange={(schema) => this.actualizarGestionData(schema)}  />}
-                
-                {this.state.formulario=="seguimiento" && <Form form={seguimiento} onSubmit={this.enviargestion} />}
-                {this.state.formulario=="tipificacion" && <Form form={tipificacion} onSubmit={this.enviargestion} />}
-
-                <div className="btn-group"  role="group" aria-label="Basic example">
-                  <button type="button" onClick={() => this.verFomrularioTipificacion("detalleLLamada")} className="btn btn-secondary">Detalle</button>
-                  <button type="button" onClick={() => this.verFomrularioTipificacion("tipificacion")} className="btn btn-secondary">Tipificar</button>
+           const area = this.props.area; 
+        
+           if(area==""){
+              return (
+                <div id="contenedorFormularios"  className='row contenedorFormularios'>
+                  {this.state.formulario=="detalleLLamada" && <Form form={this.state.detalleLLamada} onChange={(schema) => this.actualizarGestionData(schema)} onSubmit={this.actualizar} />}
+                  {this.state.formulario=="detalletelefonia"  && <Form form={detalletelefonia} onChange={(schema) => this.actualizarGestionData(schema)}  />}
                   
+                  {this.state.formulario=="seguimiento"  && <Form form={seguimiento} onSubmit={this.enviargestion} />}
+                  {this.state.formulario=="tipificacion"  && <Form form={tipificacion} onSubmit={this.enviargestion} />}
+                  <div className="btn-group"  role="group" aria-label="Basic example">
+                    <button type="button" onClick={() => this.verFomrularioTipificacion("detalleLLamada")} className="btn btn-secondary">Detalle</button>
+                    <button type="button" onClick={() => this.verFomrularioTipificacion("tipificacion")} className="btn btn-secondary">Tipificar</button>
+                  </div>
+                </div> 
+              ); 
+           }else if(area=="servicio_tecnico"){
+              return (
+                <div id="contenedorFormularios"  className='row contenedorFormularios'>
+                  {this.state.formulario=="detalleLLamada" && <Form form={this.state.detalleLLamada} onChange={(schema) => this.actualizarGestionData(schema)} onSubmit={this.actualizar} />}
+                  {this.state.formulario=="detalletelefonia"  && <Form form={detalletelefonia} onChange={(schema) => this.actualizarGestionData(schema)}  />}
                   
-                  
-                </div>
-                
-                
-              </div> 
-             
-          ); 
+                  {this.state.formulario=="seguimiento"  && <Form form={tipificacion_servicio} onSubmit={this.enviargestion} />}
+                  {this.state.formulario=="tipificacion" && <Form form={tipificacionServicioNuevoGestion} onSubmit={this.enviargestion} />}
+                  <div className="btn-group"  role="group" aria-label="Basic example">
+                    <button type="button" onClick={() => this.verFomrularioTipificacion("detalleLLamada")} className="btn btn-secondary">Detalle</button>
+                    <button type="button" onClick={() => this.verFomrularioTipificacion("tipificacion")} className="btn btn-secondary">Tipificar</button>
+                  </div>
+                </div> 
+              ); 
+           }
+            
         
     }else{
       return ( 
@@ -4400,14 +4411,6 @@ const seguimiento= {
                                 "value": "sin_interes"
                             },
                             {
-                                "label": "Agendamiento propio",
-                                "value": "agendamiento_propio"
-                            },
-                            {
-                                "label": "Agendamiento a tercero",
-                                "value": "agendamiento_tercero"
-                            },
-                            {
                                 "label": "Datos erróneos",
                                 "value": "datos_erroneos"
                             },
@@ -4866,6 +4869,119 @@ const tipificacion= {
             "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
         }
     }
+}
+
+const tipificacion_servicio ={
+    "display": "form",
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    },
+    "components": [
+        {
+            "title": "Resultado Gestión",
+            "collapsible": false,
+            "key": "resultadoGestion",
+            "type": "panel",
+            "label": "Panel",
+            "input": false,
+            "components": [
+                {
+                    "label": "Seleccionar",
+                    "widget": "choicesjs",
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Información de avance",
+                                "value": "en_seguimiento"
+                            },
+                            {
+                                "label": "Coordinación de entrega",
+                                "value": "en_seguimiento"
+                            },
+                            {
+                                "label": "Finaliza entrega",
+                                "value": "cerradoconVenta"
+                            }
+                        ]
+                    },
+                    "selectThreshold": 0.3,
+                    "key": "select",
+                    "type": "select",
+                    "input": true
+                }
+            ],
+            "path": "resultadoGestion"
+        },
+        {
+            "type": "button",
+            "label": "Submit",
+            "key": "submit",
+            "disableOnInvalid": true,
+            "input": true
+        }
+    ]
+}
+
+const tipificacionServicioNuevoGestion = {
+    "display": "form",
+    "settings": {
+        "pdf": {
+            "id": "1ec0f8ee-6685-5d98-a847-26f67b67d6f0",
+            "src": "https://files.form.io/pdf/5692b91fd1028f01000407e3/file/1ec0f8ee-6685-5d98-a847-26f67b67d6f0"
+        }
+    },
+    "components": [
+        {
+            "title": "Resultado de llamada",
+            "collapsible": false,
+            "key": "resultadoDeLlamada",
+            "type": "panel",
+            "label": "Panel",
+            "input": false,
+            "components": [
+                {
+                    "label": "Seleccionar",
+                    "widget": "choicesjs",
+                    "data": {
+                        "values": [
+                            {
+                                "label": "Cotización de Servicio",
+                                "value": "en_seguimiento"
+                            },
+                            {
+                                "label": "Sin Respuesta",
+                                "value": "sin_respuesta"
+                            },
+                            {
+                                "label": "Datos Erroneos",
+                                "value": "datos_erroneos"
+                            },
+                            {
+                                "label": "Rechazo de cotización",
+                                "value": "sin_interes"
+                            }
+                        ]
+                    },
+                    "selectThreshold": 0.3,
+                    "key": "select",
+                    "type": "select",
+                    "input": true
+                }
+            ],
+            "path": "resultadoDeLlamada"
+        },
+        {
+            "label": "Enviar",
+            "showValidations": false,
+            "disableOnInvalid": true,
+            "key": "submit",
+            "type": "button",
+            "input": true
+        }
+    ]
 }
 
 export default AreaEdicion;

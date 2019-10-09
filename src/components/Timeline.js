@@ -108,6 +108,25 @@ class Timelines extends Component {
       
   }
 
+  passTag(text){
+    const text2=text;
+   console.log(text2)
+
+    if(this.props.area==""){
+        return text2;
+    }else if(this.props.area=="servicio_tecnico") {
+      if(text2=="agendamiento propio"){
+          return "Agenda para ingreso";      
+      }else if(text2=="en seguimiento"){
+          return "Cotizacion de Servicio";
+      }else if(text2=="seguimiento"){
+          return "Informacion de avance";
+      }else{
+         return text2;
+      }
+    }
+  }
+
   render() {
    
     // acÃ¡ actualizo el componente y recorro el estado com map
@@ -167,6 +186,7 @@ class Timelines extends Component {
         fecha = moment(timeline._source.caso_ts_ult_ges).format("DD-MM-YYYY")
         hora = timeline._source.caso_ts_ult_ges.split("T")
 
+        const text= this.passTag(timeline._source.ges_resultado.replace("_"," "))
 
         return <div className="registro" key={timeline._id}>
                     <div className="fecha"><div>
@@ -177,7 +197,7 @@ class Timelines extends Component {
                     <div className="marca"><div className="linea"></div></div>
                     <div className="actividad">
                         
-                        <div className="tag">{timeline._source.ges_resultado.replace("_"," ")}</div>
+                        <div className="tag">{text}</div>
                         
                     </div>
                     <div className={"newcoment "+estilo} >
