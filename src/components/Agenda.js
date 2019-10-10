@@ -173,7 +173,50 @@ class Agenda extends Component {
 	  }
 
 	onSelectEvent(pEvent) {
-	   this.props.llamafichaDesdeAgenda(pEvent.id)
+	   //this.props.llamafichaDesdeAgenda(pEvent.id)
+
+	   
+
+      this.props.desplegarEdicion("limpiar","","");
+      
+
+          
+          var url = 'https://bscore.openpartner.cl/gdm';
+          var data = {
+                      "tx": "doc0",
+                      "ts_o": moment().format('YYYY-MM-DDTHH:mm:ss'),
+                      "tx_user": "",
+                      "origen": "face",
+                      "caso": {
+                        "user": this.props.anexo,
+                        "tipo": "",
+                        "S2_id": pEvent.id,
+                        "C_T_id": "",
+                        "campania": "",
+                        "estado": ""
+                      }
+                    };
+            fetch(url, {
+              method: 'POST', 
+              body: JSON.stringify(data), 
+              headers:{
+              'Content-Type': 'text/plain'
+              }
+            })
+            .then(res => res.json())
+            .then(response => {if(response.data){
+                              this.props.desplegarEdicion("cargar_ficha_agenda", response.data, pEvent.id);
+                              
+
+                            }})
+            .catch(error => console.error('Error:', error));
+
+
+
+      
+
+
+
 //console.log(pEvent)
 	   /*const r = window.confirm("Seguro que desea eliminar el agendamiento?")
 	   if(r == true){
@@ -360,12 +403,19 @@ enviarGestionAgenda = (event) => {
 //seguimiento_agenda
 
   	const localizer = momentLocalizer(moment)
-	const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
+	const dragHandlers = {onStart: this.onStart, onStop: this.onStop, handle:".controlador"};
     
 
     if(this.state.maximixada==false){
 
     	return (
+    		/*<Draggable {...dragHandlers}>
+		        <div id="Agenda">
+		          <div className="handle">Drag from here</div>
+		          <div>This readme is really dragging on...</div>
+		          <input type="text"/>
+		        </div>
+		      </Draggable>*/
     		<Draggable  {...dragHandlers}>
 
 		      <div id="Agenda">
@@ -402,7 +452,7 @@ enviarGestionAgenda = (event) => {
 			          events={this.props.eventosAgenda}
 			          scrollToTime={new Date(1970, 1, 1, 6)}
 			          defaultDate={new Date(moment().format("YYYY-MM-DD"))}
-			          onSelectEvent={event => console.log(event)}
+			          onSelectEvent={event => this.onSelectEvent(event)}
 			          onSelectSlot={this.handleSelect}
 			          messages={{
 			              next: <i className="fas fa-angle-right"></i>,
@@ -555,7 +605,7 @@ const seguimiento_agenda= {
                     "uploadOptions": "",
                     "uploadDir": "",
                     "reorder": false,
-                    "hidden": true
+                    "hidden": false
                 },
                 {
 		            "label": "Fecha de Agendamiento",

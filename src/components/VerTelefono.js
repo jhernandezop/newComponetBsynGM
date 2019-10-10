@@ -74,7 +74,7 @@ class Vertelefono extends Component {
   render() {
 
     const telefono=this.state.numero
-    const dragHandlers = {onStart: this.onStart, onStop: this.onStop};
+    const dragHandlers = {onStart: this.onStart, onStop: this.onStop, handle:".controlador"};
     return (
             
             <Draggable  {...dragHandlers}>

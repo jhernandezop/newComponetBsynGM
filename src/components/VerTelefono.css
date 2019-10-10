@@ -70,9 +70,18 @@
 	
 	font-size: 5px;
 	margin-bottom: 5px;
-    height: 25px;
+    height: 37px;
     min-width: 188px;
     padding-right: 5px;
+
+
+      background-color: #f5f5f5;
+      padding: 5px;
+      /*background-image: url("https://www.transparenttextures.com/patterns/subtle-dots.png");
+      
+      padding-bottom: 0px;
+      margin-bottom: 5px;*/
+      border-radius: 4px;
 
 }
 
@@ -84,7 +93,7 @@
 
 #vertelefono .controlador .btn-group{
     position: absolute;
-    right: 5px;
+    right: 10px;
 
 }
 

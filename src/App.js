@@ -132,6 +132,11 @@ class App extends Component {
 
   }
 
+  llamafichaDesdeAgenda(ficha){
+    console.log(ficha.id)
+    //document.getElementById("collapseOne_"+ficha.id).dblclick(); 
+  }
+
 
   actualizarUniqueid(uniqueid){
     
@@ -785,8 +790,9 @@ fetch(url, {
 
 
   desplegarEdicion(accion, datosFormulario, ficha) {
-    //console.log(datosFormulario)
     console.log(accion)
+    console.log(datosFormulario)
+    console.log(ficha)
     if(accion=="limpiar" || accion==""){
       this.setState({edicion:[]});
 
@@ -815,6 +821,32 @@ fetch(url, {
       })
       this.setState({fichas:fichas_actuales})
    
+   }else if(accion=="cargar_ficha_agenda"){
+
+      this.actualizarUniqueid(ficha)
+      console.log(ficha)
+      const id_ficha_selecionada = ficha
+      const fichas_actuales=this.state.fichas 
+      let fichaSelecionada = {}
+      fichas_actuales.forEach(function(element_a, index_a) {
+
+        if(element_a.caso==id_ficha_selecionada){
+          element_a.selcionada=true;
+          fichaSelecionada=element_a
+          fichaSelecionada["caso_ES"]=id_ficha_selecionada;
+          //this.setState({edicion:[{"ficha": element_a, "datosFormulario":datosFormulario}]});
+          
+        }else{
+          element_a.selcionada=false
+        }
+        
+
+      })
+      console.log(fichaSelecionada)
+      this.setState({edicion:[{"ficha": fichaSelecionada, "datosFormulario":datosFormulario}]});
+      this.setState({fichas:fichas_actuales})
+
+      
    }else if(accion=="buscar"){
        this.setState({edicion:[]});
     
@@ -1060,7 +1092,7 @@ fetch(url, {
                                               estadoAgenda={this.estadoAgenda} 
                                               eventosAgenda={this.state.eventosAgenda}
 
-                                              //llamafichaDesdeAgenda={this.llamafichaDesdeAgenda}
+                                              llamafichaDesdeAgenda={this.llamafichaDesdeAgenda}
                                               edicion={this.state.edicion}
                                               anexo={this.state.anexo}
                                               pedirFichas={this.pedirFichas}
