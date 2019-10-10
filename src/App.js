@@ -190,7 +190,7 @@ class App extends Component {
     .then(res => res.json())
     .then(response => {if(response){
                      this.state.peticionFichas=false
-                    const encontre="no"
+                    let encontre="no"
                     
                     if(response.estatus=="OK"){
                       response.casos.forEach(function(element) {
@@ -198,9 +198,10 @@ class App extends Component {
                         //PARSEO DE DATOS 
                         if(element.estado=="nuevo"){
                           encontre = "si"
-                         
+                          
                         }
                       }); 
+                       
 
                       if(encontre=="si"){
                           this.pedirFichas();

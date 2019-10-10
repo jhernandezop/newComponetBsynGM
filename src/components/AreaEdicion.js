@@ -297,7 +297,7 @@ class AreaEdicion extends Component {
                     console.log(transaccion)
 
           var url = 'https://bscore.openpartner.cl/gdm';
-         return false;
+         //return false;
             fetch(url, {
               method: 'POST', 
               body: JSON.stringify(transaccion), 
