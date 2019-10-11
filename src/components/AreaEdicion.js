@@ -400,8 +400,8 @@ actualizarGestionData(event){
                   {this.state.formulario=="detalleLLamada" && <Form form={this.state.detalleLLamada} onChange={(schema) => this.actualizarGestionData(schema)} onSubmit={this.actualizar} />}
                   {this.state.formulario=="detalletelefonia"  && <Form form={detalletelefonia} onChange={(schema) => this.actualizarGestionData(schema)}  />}
                   
-                  {this.state.formulario=="seguimiento"  && <Form form={tipificacion_servicio} onSubmit={this.enviargestion} />}
-                  {this.state.formulario=="tipificacion" && <Form form={tipificacionServicioNuevoGestion} onSubmit={this.enviargestion} />}
+                  {this.state.formulario=="seguimiento"  && <Form form={tipificacionServicioNuevoGestion} onSubmit={this.enviargestion} />}
+                  {this.state.formulario=="tipificacion" && <Form form={tipificacion_servicio} onSubmit={this.enviargestion} />}
                   <div className="btn-group"  role="group" aria-label="Basic example">
                     <button type="button" onClick={() => this.verFomrularioTipificacion("detalleLLamada")} className="btn btn-secondary">Detalle</button>
                     <button type="button" onClick={() => this.verFomrularioTipificacion("tipificacion")} className="btn btn-secondary">Tipificar</button>
