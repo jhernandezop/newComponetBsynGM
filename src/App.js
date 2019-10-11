@@ -1092,7 +1092,7 @@ fetch(url, {
           {this.state.verAgenda ==true && <Agenda  
                                               estadoAgenda={this.estadoAgenda} 
                                               eventosAgenda={this.state.eventosAgenda}
-
+                                              
                                               llamafichaDesdeAgenda={this.llamafichaDesdeAgenda}
                                               edicion={this.state.edicion}
                                               anexo={this.state.anexo}

@@ -121,6 +121,8 @@ class Timelines extends Component {
           return "Cotizacion de Servicio";
       }else if(text2=="seguimiento"){
           return "Informacion de avance";
+      }else if(text2=="agendamiento tercero"){
+          return "Coordinación";
       }else{
          return text2;
       }

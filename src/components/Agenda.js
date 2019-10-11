@@ -342,7 +342,7 @@ enviarGestionAgenda = (event) => {
                         "destino":"test",
                         "tx_version" : "0.3",
                         "origen":"face",
-                        "uniqueid":this.props.uniqueid,
+                        "uniqueid":this.props.edicion[0].ficha.caso_ES,
                         "accion":"",
                         "caso": {
                             "nro_gestion": this.props.edicion[0].ficha.nro_gestion,
@@ -853,6 +853,39 @@ const seguimientoAgendaServicioTecnico= {
                     "reorder": false
                 },
                 {
+                    "label": "Comentarios",
+                    "showWordCount": false,
+                    "showCharCount": false,
+                    "tableView": true,
+                    "alwaysEnabled": false,
+                    "type": "textarea",
+                    "input": true,
+                    "key": "comentarios",
+                    "defaultValue": "",
+                    "validate": {
+                        "customMessage": "",
+                        "json": ""
+                    },
+                    "conditional": {
+                        "show": "",
+                        "when": "",
+                        "json": ""
+                    },
+                    "inputFormat": "html",
+                    "encrypted": false,
+                    "properties": {},
+                    "customConditional": "",
+                    "logic": [],
+                    "attributes": {},
+                    "autoExpand": true,
+                    "isUploadEnabled": false,
+                    "uploadUrl": "",
+                    "uploadOptions": "",
+                    "uploadDir": "",
+                    "reorder": false,
+                    "hidden": false
+                },
+                {
 		            "label": "Fecha de Agendamiento",
 		            "defaultValue": "",
 		            "inputFormat": "plain",
@@ -860,7 +893,7 @@ const seguimientoAgendaServicioTecnico= {
 		            "type": "textfield",
 		            "input": true,
 		             "hidden": true
-		        },
+		            },
                 {
                     "label": "Detalle del Agendamiento",
                     "columns": [

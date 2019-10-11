@@ -199,7 +199,7 @@ class AreaEdicion extends Component {
 
 
 
-        console.log(event.data.fechaDeAgendamiento)
+       /* console.log(event.data.fechaDeAgendamiento)
         const los_ejecitivos=this.props.ejecutivos 
         const datos_ejecutivo = []
         los_ejecitivos.forEach(function(element) {
@@ -210,18 +210,20 @@ class AreaEdicion extends Component {
             }
         })
        
-        console.log(datos_ejecutivo)
+        console.log(datos_ejecutivo)*/
         //const fechas_seguimiento=event.data.fechaDeAgendamiento
         //const fechas_seguimiento=fecha_seguimiento.split("T",2)
-        items_doc_data["ges_ciudad_agenda"]=datos_ejecutivo[2]
+        items_doc_data["ges_ciudad_agenda"]="";//"";//datos_ejecutivo[2]
         items_doc_data["ges_comentario_sv"]=event.data.comentarios
-        items_doc_data["ges_comuna_agenda"]=datos_ejecutivo[1]
-        items_doc_data["ges_comentario_gestion"]=event.data.comentarioAEjecutivo
-        items_doc_data["ges_fecha_agendamiento"]=event.data.fechaDeAgendamiento.slice(0, 10)
-        items_doc_data["ges_hora_agendamiento"]=event.data.fechaDeAgendamiento.slice(11, 18)
+        items_doc_data["ges_comuna_agenda"]="";//datos_ejecutivo[1]
+        items_doc_data["ges_comentario_gestion"]="";//event.data.comentarioAEjecutivo
+        items_doc_data["ges_fecha_agendamiento"]="";//event.data.fechaDeAgendamiento.slice(0, 10)
+        items_doc_data["ges_hora_agendamiento"]="";//event.data.fechaDeAgendamiento.slice(11, 18)
+        items_doc_data["ges_fecha_next"]="";//event.data.fechaDeAgendamiento.slice(0, 10)
+        items_doc_data["ges_hora_next"]="";//event.data.fechaDeAgendamiento.slice(11, 18)
         items_doc_data["ges_resultado"]=event.data.select
-        items_doc_data["ges_rut_asesor_piso"]=event.data.ejecutivoDePiso
-        items_doc_data["ges_sucursal_agenda"]=datos_ejecutivo[0]
+        items_doc_data["ges_rut_asesor_piso"]="";//event.data.ejecutivoDePiso
+        items_doc_data["ges_sucursal_agenda"]="";//datos_ejecutivo[0]
         items_doc_data["ges_ts"]=this.props.formulario[0].datosFormulario.caso_ts
         items_doc_data["ges_tso"]=moment().format('YYYY-MM-DDTHH:mm:ss')
         items_doc_data["ges_user"]=this.props.anexo
@@ -235,6 +237,8 @@ class AreaEdicion extends Component {
         items_doc_data["ges_comentario_gestion"]=""
         items_doc_data["ges_fecha_agendamiento"]=""
         items_doc_data["ges_hora_agendamiento"]=""
+        items_doc_data["ges_fecha_next"]=""
+        items_doc_data["ges_hora_next"]=""
         items_doc_data["ges_resultado"]=event.data.select
         items_doc_data["ges_rut_asesor_piso"]=""
         items_doc_data["ges_sucursal_agenda"]=""
@@ -264,7 +268,7 @@ class AreaEdicion extends Component {
                         "destino":"test",
                         "tx_version" : "0.3",
                         "origen":"face",
-                        "uniqueid":this.props.uniqueid,
+                        "uniqueid":this.state.ficha_S2_id,
                         "accion":"",
                         "caso": {
                             "nro_gestion": this.state.ficha_nro_gestion,
@@ -4881,25 +4885,25 @@ const tipificacion_servicio ={
     },
     "components": [
         {
-            "title": "Resultado Gestión",
+            "title": "Resultado de Gestión",
             "collapsible": false,
-            "key": "resultadoGestion",
+            "key": "resultadoDeGestion",
             "type": "panel",
             "label": "Panel",
             "input": false,
             "components": [
                 {
-                    "label": "Seleccionar",
+                    "label": "Select",
                     "widget": "choicesjs",
                     "data": {
                         "values": [
                             {
                                 "label": "Información de avance",
-                                "value": "en_seguimiento"
+                                "value": "agendamiento_tercero"
                             },
                             {
                                 "label": "Coordinación de entrega",
-                                "value": "en_seguimiento"
+                                "value": "agendamiento_tercero"
                             },
                             {
                                 "label": "Finaliza entrega",
@@ -4911,15 +4915,23 @@ const tipificacion_servicio ={
                     "key": "select",
                     "type": "select",
                     "input": true
+                },
+                {
+                    "label": "Comentarios",
+                    "autoExpand": false,
+                    "key": "comentarios",
+                    "type": "textarea",
+                    "input": true
                 }
             ],
-            "path": "resultadoGestion"
+            "path": "resultadoDeGestion"
         },
         {
-            "type": "button",
-            "label": "Submit",
-            "key": "submit",
+            "label": "Enviar",
+            "showValidations": false,
             "disableOnInvalid": true,
+            "key": "submit",
+            "type": "button",
             "input": true
         }
     ]
@@ -4968,6 +4980,13 @@ const tipificacionServicioNuevoGestion = {
                     "selectThreshold": 0.3,
                     "key": "select",
                     "type": "select",
+                    "input": true
+                },
+                {
+                    "label": "Comentarios",
+                    "autoExpand": false,
+                    "key": "comentarios",
+                    "type": "textarea",
                     "input": true
                 }
             ],
