@@ -6,7 +6,7 @@
     "bpmn-js": "^4.0.4",
     "d3": "^5.9.7",
     "electron-packager": "^14.0.4",
-    "moment": "^2.24.0",
+    "moment": "^2.29.2",
     "react": "^16.8.6",
     "react-big-calendar": "^0.22.0",
     "react-date-range": "^0.9.4",
